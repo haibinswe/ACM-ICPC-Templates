@@ -1,7 +1,7 @@
 //O(n^2)
 const int N = 1005;
-int dp[N];      //dp[i]¼ÇÂ¼µ½[0, i]Êı×éµÄLIS
-int lis = 1;    //LIS³¤¶È
+int dp[N];      //dp[i]è®°å½•åˆ°[0, i]æ•°ç»„çš„LIS
+int lis = 1;    //LISé•¿åº¦
 int LIS(int * arr, int size)
 {
     for (int i = 0; i < size; i++)
@@ -12,8 +12,8 @@ int LIS(int * arr, int size)
     {
         for (int j = 0; j < i; j++)
         {
-            //Èç¹ûÒªÇó·Çµİ¼õ×ÓĞòÁĞÖ»Ğè½«arr[j] < arr[i]¸Ä³É<=
-            //Èç¹ûÒªÇóµİ¼õ×ÓĞòÁĞÖ»Ğè¸ÄÎª>
+            //å¦‚æœè¦æ±‚éé€’å‡å­åºåˆ—åªéœ€å°†arr[j] < arr[i]æ”¹æˆ<=
+            //å¦‚æœè¦æ±‚é€’å‡å­åºåˆ—åªéœ€æ”¹ä¸º>
             if (arr[j] < arr[i] && dp[i] < dp[j] + 1)
             {
                 dp[i] = dp[j] + 1;
@@ -27,8 +27,8 @@ int LIS(int * arr, int size)
     return lis;
 }
 
-//Êä³öLIS
-//´æÔÚÒÉÎÊ
+//è¾“å‡ºLIS
+//å­˜åœ¨ç–‘é—®
 void outputLIS(int * arr, int index)
 {
     bool isLIS = 0;
@@ -54,12 +54,12 @@ int a[N], dp[N];
 int LIS(int n)
 {
     int len = 1;
-    dp[1] = a[0]; //³õÊ¼»¯£º³¤¶ÈÎª1µÄLISÄ©Î²Îªd[0]
+    dp[1] = a[0]; //åˆå§‹åŒ–ï¼šé•¿åº¦ä¸º1çš„LISæœ«å°¾ä¸ºd[0]
     for (int i = 1; i < n; i++)
     {
-        int pos = upper_bound(dp + 1, dp + len + 1, a[i]) - dp; //ÕÒµ½²åÈëÎ»ÖÃ
+        int pos = upper_bound(dp + 1, dp + len + 1, a[i]) - dp; //æ‰¾åˆ°æ’å…¥ä½ç½®
         dp[pos] = a[i];
-        if (len < pos) //°´ĞèÒª¸üĞÂLIS³¤¶È
+        if (len < pos) //æŒ‰éœ€è¦æ›´æ–°LISé•¿åº¦
         {
             len = pos;
         }

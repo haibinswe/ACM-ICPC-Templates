@@ -1,3 +1,4 @@
+﻿//UVa 10692
 long long phi(long long n)
 {
     long long ans = n;
@@ -26,10 +27,7 @@ long long qPow(long long A, long long n, long long c)
     long long rslt = 1;
     while (n)
     {
-        if (n & 1) //如果n是奇数
-        {
-            rslt = (resl * A) % c;
-        }
+        if (n & 1) rslt = (rslt * A) % c;
         A = (A * A) % c;
         n >>= 1;
     }

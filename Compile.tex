@@ -1,0 +1,330 @@
+\documentclass[a4paper, 12pt, twoside]{article}
+
+\setlength{\columnsep}{0.8cm}
+\usepackage{xeCJK}
+\setsansfont{Microsoft YaHei Mono}
+\setmonofont{Microsoft YaHei Mono}
+\setmainfont{Microsoft YaHei Mono}
+
+\setCJKmainfont{Microsoft YaHei Mono}
+\setCJKsansfont{Microsoft YaHei Mono}
+\setCJKmonofont{Microsoft YaHei Mono}
+
+\usepackage{listings}
+\lstset{
+	language=C++,
+	breaklines=true,
+	tabsize=4,
+	basicstyle=\sf\footnotesize,
+	numberstyle=\sf\footnotesize,
+	commentstyle=\sf\footnotesize,
+	numbers=left,
+	frame=leftline,
+	escapeinside=``,
+	extendedchars=false,
+	showstringspaces=false
+}
+
+\usepackage{geometry}
+\geometry{left=2cm,right=2cm,top=1.2cm,bottom=1.8cm,headsep=0.1cm,footnotesep=0.5cm}
+\usepackage{courier}
+
+\usepackage[
+	CJKbookmarks=true,
+	colorlinks,
+	linkcolor=black,
+	anchorcolor=black,
+	citecolor=black
+]{hyperref}
+\AtBeginDvi{\special{pdf:tounicode UTF8-UCS2}}
+
+\usepackage{fancyhdr}
+
+\usepackage{sectsty}
+\sectionfont{\large}
+\subsectionfont{\large}
+\subsubsectionfont{\large}
+
+\usepackage{amsmath}
+\usepackage{booktabs}
+
+\usepackage{indentfirst}
+\setlength{\parindent}{0em}
+\begin{document}
+% 页面设置
+\pagestyle{fancy}
+\fancyfoot[C]{}
+\cfoot{\thepage}
+% 封面
+\newgeometry{left=1cm,right=1cm,top=1.5cm,bottom=1.5cm}
+\begin{titlepage}
+	\pagestyle{empty}
+	
+  \begin{center}
+		~\\[80pt]
+    \fontsize{40pt}{\baselineskip}\selectfont \textsc{\textbf{ACM/ICPC Templates}}\\[32pt]
+    ~\\[20pt]
+    \includegraphics[scale=.7]{./Cover.jpg}
+    ~\\[20pt]
+    \Huge\textbf{GYSHGX868}\\[14pt]
+    \Large\textbf{Last build at \today}
+  \end{center}
+\end{titlepage}
+\restoregeometry
+
+\setcounter{page}{1}
+\pagenumbering{Roman}
+\tableofcontents
+\clearpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+% --- 设置 ---
+\section{设置}
+\subsection{C++头文件}
+\lstinputlisting{"./Settings/C++ Header.cpp"}
+
+% --- STL ---
+\section{STL}
+\subsection{STL总结}
+\lstinputlisting{"./STL/STL.cpp"}
+\subsection{map}
+\lstinputlisting{"./STL/map.cpp"}
+
+% --- 基本算法 ---
+\section{基本算法}
+\subsection{二分法}
+\lstinputlisting{"./Basic Algorithm/Bisection Method.cpp"}
+\subsection{三分法}
+\lstinputlisting{"./Basic Algorithm/Trichotomy.cpp"}
+
+% --- 数据结构 ---
+\section{数据结构}
+\subsection{离散化}
+\lstinputlisting{"./Data Structure/Discretization.cpp"}
+\subsection{并查集}
+\lstinputlisting{"./Data Structure/Union Find.cpp"}
+
+\subsection{树状数组}
+\subsubsection{一维树状数组}
+\lstinputlisting{"./Data Structure/Binary Indexed Tree/BIT with Linear Array.cpp"}
+\subsubsection{二维树状数组}
+\lstinputlisting{"./Data Structure/Binary Indexed Tree/BIT with Dyadic Array.cpp"}
+\subsubsection{三维树状数组}
+\lstinputlisting{"./Data Structure/Binary Indexed Tree/BIT with 3D Array.cpp"}
+\subsubsection{一维树状数组区间更新区间查询}
+\lstinputlisting{"./Data Structure/Binary Indexed Tree/BIT with Linear Array Interval Update and Query.cpp"}
+
+\subsection{线段树}
+\subsubsection{单点更新}
+\lstinputlisting{"./Data Structure/Segment Tree/Point Update.cpp"}
+\subsubsection{区间更新}
+\lstinputlisting{"./Data Structure/Segment Tree/Interval Update.cpp"}
+\subsubsection{线段树 + DFS}
+\lstinputlisting{"./Data Structure/Segment Tree/ST with DFS.cpp"}
+\subsubsection{二维线段树区间更新单点求和}
+\lstinputlisting{"./Data Structure/Segment Tree/ST with Dyadic Array Interval Update Query Point Sum.cpp"}
+\subsubsection{二维线段树单点更新求最大值最小值}
+\lstinputlisting{"./Data Structure/Segment Tree/ST with Dyadic Array Point Update Query Maximum and Minimum.cpp"}
+
+\subsection{RMQ}
+\subsubsection{一维RMQ}
+\lstinputlisting{"./Data Structure/RMQ/RMQ with Linear Array.cpp"}
+\subsubsection{二维RMQ}
+\lstinputlisting{"./Data Structure/RMQ/RMQ with Dyadic Array.cpp"}
+
+\subsection{主席树}
+\subsubsection{主席树}
+\lstinputlisting{"./Data Structure/Persistent Tree/Persistent Tree.cpp"}
+\subsubsection{树状数组 + 主席树}
+\lstinputlisting{"./Data Structure/Persistent Tree/BIT + Persistent Tree.cpp"}
+
+\subsection{Size Balanced Tree}
+\lstinputlisting{"./Data Structure/Size Balanced Tree.cpp"}
+
+\subsection{划分树}
+\lstinputlisting{"./Data Structure/Partition Tree.cpp"}
+
+\subsection{左偏树}
+\lstinputlisting{"./Data Structure/Leftist Tree.cpp"}
+
+% --- 字符串 ---
+\section{字符串}
+\subsection{KMP}
+\lstinputlisting{"./String/KMP.cpp"}
+
+\subsection{扩展KMP}
+\lstinputlisting{"./String/Extend KMP.cpp"}
+
+\subsection{字典树}
+\lstinputlisting{"./String/Trie Tree.cpp"}
+
+\subsection{AC自动机}
+\lstinputlisting{"./String/Aho-Corasick automaton.cpp"}
+
+\subsection{循环同构最小表示法}
+\lstinputlisting{"./String/Minimum Notation.cpp"}
+
+\subsection{哈希}
+\subsubsection{字符串哈希}
+\lstinputlisting{"./String/Hash/String Hash.cpp"}
+\subsubsection{字符串矩阵哈希}
+\lstinputlisting{"./String/Hash/String Matrix Hash.cpp"}
+\subsubsection{哈希函数}
+\lstinputlisting{"./String/Hash/Hash Function.cpp"}
+
+% --- 动态规划 ---
+\section{动态规划}
+\subsection{最大子段和}
+\lstinputlisting{"./Dynamic Programming/Longest Subsequence Sum with Linear Array.cpp"}
+\subsection{二维最大子段和}
+\lstinputlisting{"./Dynamic Programming/Longest Subsequence Sub with Dyadic Array.cpp"}
+\subsection{最长上升子序列 O(n\^2) + O(nlogn)}
+\lstinputlisting{"./Dynamic Programming/Longest Increasing Subsequence.cpp"}
+\subsection{最长公共子序列}
+\lstinputlisting{"./Dynamic Programming/Longest Common Subsequence.cpp"}
+\subsection{最长公共上升子序列}
+\lstinputlisting{"./Dynamic Programming/LCIS.cpp"}
+\subsection{数位DP}
+\lstinputlisting{"./Dynamic Programming/Digital DP.cpp"}
+\subsection{01背包 + 一维数组}
+\lstinputlisting{"./Dynamic Programming/01 Knapsack with Linear Array.cpp"}
+\subsection{01背包 + 二维数组}
+\lstinputlisting{"./Dynamic Programming/01 Knapsack with Dyadic Array.cpp"}
+\subsection{完全背包}
+\lstinputlisting{"./Dynamic Programming/Unbounded Knapsack.cpp"}
+
+% -- 数论 ---
+\section{数论}
+\subsection{质数判断}
+\lstinputlisting{"./number Theory/Judge Prime.cpp"}
+\subsection{Miller Rabin}
+\lstinputlisting{"./Number Theory/Miller Rabin.cpp"}
+\subsection{筛法求质数}
+\lstinputlisting{"./Number Theory/Sieve of Eratosthenes.cpp"}
+\subsection{区间筛质数}
+\lstinputlisting{"./Number Theory/Interval Sieve of Eratosthenes.cpp"}
+\subsection{分解质因数}
+\lstinputlisting{"./Number Theory/Prime Factorizations.cpp"}
+\subsection{因数个数打表}
+\lstinputlisting{"./Number Theory/Factor Number Table.cpp"}
+\subsection{快速乘法}
+\lstinputlisting{"./Number Theory/Quick Multiplication.cpp"}
+\subsection{快速幂}
+\lstinputlisting{"./Number Theory/Quick Power.cpp"}
+\subsection{费马小定理求逆元}
+\lstinputlisting{"./Number Theory/Inverse Fermat Little Theorem.cpp"}
+\subsection{扩展欧几里得算法}
+\lstinputlisting{"./Number Theory/Extend GCD.cpp"}
+\subsection{扩展欧几里得算法求逆元}
+\lstinputlisting{"./Number Theory/Inverse Extend GCD.cpp"}
+\subsection{欧拉函数}
+\lstinputlisting{"./Number Theory/Euler Function.cpp"}
+\subsection{欧拉函数打表}
+\lstinputlisting{"./Number Theory/Euler Function Table.cpp"}
+\subsection{中国剩余定理}
+\lstinputlisting{"./Number Theory/Chinese Remainder Theorem.cpp"}
+\subsection{组合数打表}
+\lstinputlisting{"./Number Theory/Combination Table.cpp"}
+\subsection{组合数在线算法}
+\lstinputlisting{"./Number Theory/Combination Online.cpp"}
+\subsection{Lucas定理}
+\lstinputlisting{"./Number Theory/Lucas Theorem.cpp"}
+\subsection{指数循环节}
+\lstinputlisting{"./Number Theory/Huge Mods.cpp"}
+
+% --- 图论 ---
+\section{图论}
+\subsection{邻接表}
+\lstinputlisting{"./Graph Theory/Adjacency List.cpp"}
+\subsection{SPFA}
+\lstinputlisting{"./Graph Theory/SPFA.cpp"}
+\subsection{Dijkstra}
+\lstinputlisting{"./Graph Theory/Dijkstra.cpp"}
+\subsection{Dijkstra + Queue}
+\lstinputlisting{"./Graph Theory/Dijkstra+Queue.cpp"}
+\subsection{Dijkstra + Heap}
+\lstinputlisting{"./Graph Theory/Dijkstra+Heap.cpp"}
+\subsection{Floyd Warshall}
+\lstinputlisting{"./Graph Theory/Floyd Warshall.cpp"}
+\subsection{Kruskal}
+\lstinputlisting{"./Graph Theory/Kruskal.cpp"}
+\subsection{Prim}
+\lstinputlisting{"./Graph Theory/Prim.cpp"}
+\subsection{Prim + Heap}
+\lstinputlisting{"./Graph Theory/Prim+Heap.cpp"}
+\subsection{最小树形图朱刘算法}
+\lstinputlisting{"./Graph Theory/Chu-Liu Algorithm.cpp"}
+\subsection{树的直径}
+\lstinputlisting{"./Graph Theory/Tree Diameter.cpp"}
+\subsection{二分图}
+\lstinputlisting{"./Graph Theory/Bipartite Graph.cpp"}
+\subsection{网络流Dinic}
+\lstinputlisting{"./Graph Theory/Dinic.cpp"}
+\subsection{LCA Tarjan}
+\lstinputlisting{"./Graph Theory/LCA Tarjan.cpp"}
+\subsection{2 - SAT}
+\lstinputlisting{"./Graph Theory/2-SAT_usage.cpp"}
+\lstinputlisting{"./Graph Theory/2-SAT.cpp"}
+
+% --- 数学 ---
+\section{数学}
+\subsection{高斯消元}
+\lstinputlisting{"./Mathematics/Gaussian Elimination.cpp"}
+\subsection{二进制下的高斯消元}
+\lstinputlisting{"./Mathematics/Gaussian Elimination with Binary.cpp"}
+\subsection{BigInteger高精度整数类}
+\lstinputlisting{"./Mathematics/BigInteger.cpp"}
+\subsection{Fraction分数类}
+\lstinputlisting{"./Mathematics/Fraction.cpp"}
+\subsection{Matrix矩阵类}
+\lstinputlisting{"./Mathematics/Matrix.cpp"}
+\subsection{分治法等比数列求和}
+\lstinputlisting{"./Mathematics/Geometric Progression Sum.cpp"}
+\subsection{自适应Simpson积分法}
+\lstinputlisting{"./Mathematics/Simpson Integration.cpp"}
+\subsection{Romberg积分法}
+\lstinputlisting{"./Mathematics/Romberg Integration.cpp"}
+\subsection{De Bruijn序列}
+\lstinputlisting{"./Mathematics/De Bruijn Sequence.cpp"}
+\subsection{格雷码}
+\lstinputlisting{"./Mathematics/Gray Code.cpp"}
+\subsection{计算表达式}
+\lstinputlisting{"./Mathematics/Calculate Expression.cpp"}
+
+% --- 博弈 ---
+\section{博弈}
+\subsection{巴什博奕}
+\lstinputlisting{"./Game/Bash Game.cpp"}
+\subsection{尼姆博弈}
+\lstinputlisting{"./Game/Nim Game.cpp"}
+\subsection{威佐夫博奕}
+\lstinputlisting{"./Game/Wythoff Game.cpp"}
+
+% --- 几何计算 ---
+\section{几何计算}
+\subsection{最近点对}
+\lstinputlisting{"./Geometry/Closest Points.cpp"}
+\subsection{几何计算类}
+\lstinputlisting{"./Geometry/Geometry.cpp"}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+\end{document}

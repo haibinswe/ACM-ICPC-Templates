@@ -1,31 +1,14 @@
-#include<cstdio>
-#include<cstdlib>
-#include<cstring>
-#include<cmath>
-#include<ctime>
-#include<cassert>
-#include<climits>
-#include<iostream>
-#include<algorithm>
-#include<string>
-#include<vector>
-#include<deque>
-#include<list>
-#include<set>
-#include<map>
-#include<stack>
-#include<queue>
-#include<numeric>
-#include<iomanip>
-#include<bitset>
-#include<sstream>
-#include<fstream>
-#define debug puts("-----")
-#define pi (acos(-1.0))
-#define eps (1e-8)
-#define inf (1<<30)
-#define INF (1ll<<62)
+#include <cmath>
+#include <deque>
+#include <vector>
+#include <cstdio>
+#include <iostream>
+#include <algorithm>
+#define pi acos(-1.0)
+#define eps 1e-8
+#define inf 1<<30
 using namespace std;
+
 inline double sqr(const double &x)
 {
     return x * x;
@@ -172,7 +155,7 @@ struct line
     {
         return sgn(det(b - l.s, l.vec())) * sgn(det(a - l.s, l.vec())) > 0;
     }
-    //两直接的交点
+    //两直线的交点
     friend point linexline(const line l1, const line l2) //利用相似三角形对应边成比例
     {
         double s1 = det(l1.s - l2.s, l2.vec());

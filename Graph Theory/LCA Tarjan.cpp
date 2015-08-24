@@ -1,3 +1,4 @@
+//ÀëÏßËã·¨
 typedef int mytype;
 const int NV = 40005;
 const int NE = NV;

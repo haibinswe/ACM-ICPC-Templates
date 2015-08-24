@@ -1,3 +1,4 @@
+//≤ªª•÷ 
 void crt()
 {
     int t;
