@@ -10,32 +10,15 @@ int finds(int x)
 
 int merge(int x, int y)
 {
-    if (!x)
-    {
-        return y;
-    }
-    if (!y)
-    {
-        return x;
-    }
-    if (heap[y].val > heap[x].val)
-    {
-        swap(x, y);
-    }
+    if (!x) return y;
+    if (!y) return x;
+    if (heap[y].val > heap[x].val) swap(x, y);
     heap[x].r = merge(heap[x].r, y);
     heap[heap[x].r].dad = x;
     if (heap[heap[x].l].dis < heap[heap[x].r].dis)
-    {
         swap(heap[x].l, heap[x].r);
-    }
-    if (heap[x].r == 0)
-    {
-        heap[x].dis = 0;
-    }
-    else
-    {
-        heap[x].dis = heap[heap[x].r].dis + 1;
-    }
+    if (heap[x].r == 0) heap[x].dis = 0;
+    else heap[x].dis = heap[heap[x].r].dis + 1;
     return x;
 }
 
@@ -76,10 +59,7 @@ int main()
             scanf("%d%d", &x, &y);
             x = finds(x);
             y = finds(y);
-            if (x == y)
-            {
-                puts("-1");
-            }
+            if (x == y) puts("-1");
             else
             {
                 heap[x].val >>= 1;

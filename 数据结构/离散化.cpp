@@ -19,6 +19,7 @@ int inithash(int n)
     sort(data + 1, data + n + 1);
     return unique(data + 1, data + n + 1) - data - 1;
 }
+
 int hash(int x)
 {
     return lower_bound(data + 1, data + m + 1, x) - data;
