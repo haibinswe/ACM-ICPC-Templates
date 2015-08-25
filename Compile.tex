@@ -1,25 +1,29 @@
-\documentclass[a4paper, 12pt, twoside]{article}
+\documentclass[a4paper, 12pt]{article}
 
 \setlength{\columnsep}{0.8cm}
 \usepackage{xeCJK}
 \setsansfont{Microsoft YaHei Mono}
 \setmonofont{Microsoft YaHei Mono}
-\setmainfont{Microsoft YaHei Mono}
+% \setmainfont{Microsoft YaHei Mono}
 
 \setCJKmainfont{Microsoft YaHei Mono}
 \setCJKsansfont{Microsoft YaHei Mono}
 \setCJKmonofont{Microsoft YaHei Mono}
 
 \usepackage{listings}
+\usepackage{xcolor}
+\usepackage{color}
+\definecolor{Key}{rgb}{0.5,0,0.3}
 \lstset{
-	language=C++,
+    language=C++,
 	breaklines=true,
 	tabsize=4,
 	basicstyle=\sf\footnotesize,
 	numberstyle=\sf\footnotesize,
-	commentstyle=\sf\footnotesize,
+	commentstyle=\bfseries\color{green!40!black},
+    keywordstyle=\bfseries\color{Key},
 	numbers=left,
-	frame=leftline,
+	frame=single,
 	escapeinside=``,
 	extendedchars=false,
 	showstringspaces=false
@@ -81,8 +85,11 @@
 
 % --- 设置 ---
 \section{设置}
+
 \subsection{C++头文件}
-\lstinputlisting{"./Settings/C++ Header.cpp"}
+\lstinputlisting[language={C++}]{"./Settings/C++ Header.cpp"}
+\subsection{Java基本使用框架}
+\lstinputlisting[language={Java}]{"./Settings/Java Frame.java"}
 
 % --- STL ---
 \section{STL}
@@ -308,23 +315,28 @@
 \subsection{几何计算类}
 \lstinputlisting{"./Geometry/Geometry.cpp"}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+% --- 其他应用 ---
+\section{其他应用}
+\subsection{C++输入输出优化}
+\lstinputlisting{"./Others/Read and Write Plug.cpp"}
+\subsection{Java输入优化}
+\lstinputlisting{"./Others/Reader Class.java"}
+\subsection{编译器相关优化}
+\lstinputlisting{"./Others/Compiler Settings.cpp"}
+\subsection{数字用英文表示}
+\lstinputlisting{"./Others/Number to English.cpp"}
+\subsection{蔡勒公式}
+\lstinputlisting{"./Others/Zeller Congruence.cpp"}
+\subsection{位反转}
+将一个10进制的数的2进制形式按位反转。
+例如：2
+00000000000000000000000000000010
+反转为：
+01000000000000000000000000000000
+最后的值为：1073741824
+\lstinputlisting{"./Others/Reverse Bits.cpp"}
+\subsection{归并排序求逆序数}
+\lstinputlisting{"./Others/Merge Sort to Reverse Number.cpp"}
 
 \clearpage
 \end{document}

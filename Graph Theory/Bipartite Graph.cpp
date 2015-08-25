@@ -1,4 +1,4 @@
-//ĞÙÑÀÀûËã·¨(dfs)
+//åŒˆç‰™åˆ©ç®—æ³•(dfs)
 const int NV = 505;
 const int NE = 10005;
 int he[NV], ecnt, pre[NV], vis[NV];

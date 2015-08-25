@@ -6,8 +6,8 @@
 #define inf 0x3f3f3f3f
 using namespace std;
 
-typedef int vertex_t;     //下标
-typedef int weight_t;     //权值
+typedef int vertex_t;
+typedef int weight_t;
 
 const weight_t max_weight = inf;
 
