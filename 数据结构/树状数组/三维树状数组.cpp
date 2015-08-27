@@ -1,5 +1,5 @@
 int N;
-long long c[130][130][130] = {};
+long long bit[130][130][130] = {};
 inline int lowbit(int x)
 {
     return x & (-x);
@@ -13,7 +13,7 @@ void update(int x, int y, int z, long long v)
         {
             for (int k = z; k <= N; k += lowbit(k))
             {
-                c[i][j][k] += v;
+                bit[i][j][k] += v;
             }
         }
     }
@@ -28,7 +28,7 @@ long long query(int x, int y, int z)
         {
             for (int k = z; k > 0; k -= lowbit(k))
             {
-                s += c[i][j][k];
+                s += bit[i][j][k];
             }
         }
     }

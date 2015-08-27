@@ -16,7 +16,7 @@ struct Nodex
         sty[i].l = _l;
         sty[i].r = _r;
         sty[i].val = 0;
-        if(_l == _r)
+        if (_l == _r)
         {
             locy[_l] = i;
             return;
@@ -27,20 +27,14 @@ struct Nodex
     }
     void add(int _l, int _r, int val, int i = 1)
     {
-        if(sty[i].l == _l && sty[i].r == _r)
+        if (sty[i].l == _l && sty[i].r == _r)
         {
             sty[i].val += val;
             return;
         }
         int mid = (sty[i].l + sty[i].r) >> 1;
-        if(_r <= mid)
-        {
-            add(_l, _r, val, i << 1);
-        }
-        else if(_l > mid)
-        {
-            add(_l, _r, val, (i << 1) | 1);
-        }
+        if (_r <= mid) add(_l, _r, val, i << 1);
+        else if (_l > mid) add(_l, _r, val, (i << 1) | 1);
         else
         {
             add(_l, mid, val, i << 1);
@@ -54,7 +48,7 @@ void build(int l, int r, int i = 1)
     stx[i].l = l;
     stx[i].r = r;
     stx[i].build(1, n);
-    if(l == r)
+    if (l == r)
     {
         locx[l] = i;
         return;
@@ -66,20 +60,14 @@ void build(int l, int r, int i = 1)
 
 void add(int x1, int x2, int y1, int y2, int val, int i = 1)
 {
-    if(stx[i].l == x1 && stx[i].r == x2)
+    if (stx[i].l == x1 && stx[i].r == x2)
     {
         stx[i].add(y1, y2, val);
         return;
     }
     int mid = (stx[i].l + stx[i].r) / 2;
-    if(x2 <= mid)
-    {
-        add(x1, x2, y1, y2, val, i << 1);
-    }
-    else if(x1 > mid)
-    {
-        add(x1, x2, y1, y2, val, (i << 1) | 1);
-    }
+    if (x2 <= mid) add(x1, x2, y1, y2, val, i << 1);
+    else if (x1 > mid) add(x1, x2, y1, y2, val, (i << 1) | 1);
     else
     {
         add(x1, mid, y1, y2, val, i << 1);
@@ -90,10 +78,10 @@ void add(int x1, int x2, int y1, int y2, int val, int i = 1)
 int sum(int x, int y)
 {
     int ret = 0;
-    for(int i = locx[x]; i; i >>= 1)
-        for(int j = locy[y]; j; j >>= 1)
-        {
+    for (int i = locx[x]; i; i >>= 1)
+    {
+        for (int j = locy[y]; j; j >>= 1)
             ret += stx[i].sty[j].val;
-        }
+    }
     return ret;
 }

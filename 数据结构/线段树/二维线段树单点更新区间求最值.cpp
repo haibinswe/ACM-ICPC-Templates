@@ -1,153 +1,69 @@
-const int NV = 1005;
-struct Nodey
+//hdu 1823
+#define NV 105
+#define lson l,mid,rt<<1
+#define rson mid+1,r,rt<<1|1
+int sum[NV << 2][NV << 2], n = 1000;
+void SubBuild(int t, int l, int r, int rt)
 {
-    int l, r;
-    int Max, Min;
-};
-
-int locy[NV], locx[NV];
-struct Nodex
-{
-    int l, r;
-    Nodey sty[NV * 4];
-    void build(int _l, int _r, int i = 1)
+    sum[t][rt] = 0;
+    if (l != r)
     {
-        sty[i].l = _l;
-        sty[i].r = _r;
-        sty[i].Max = -inf;
-        sty[i].Min = inf;
-        if(_l == _r)
-        {
-            locy[_l] = i;
-            return;
-        }
-        int mid = (_l + _r) / 2;
-        build(_l, mid, i << 1);
-        build(mid + 1, _r, (i << 1) | 1);
-    }
-    int queryMin(int _l, int _r, int i = 1)
-    {
-        if(sty[i].l == _l && sty[i].r == _r)
-        {
-            return sty[i].Min;
-        }
-        int mid = (sty[i].l + sty[i].r) / 2;
-        if(_r <= mid)
-        {
-            return queryMin(_l, _r, i << 1);
-        }
-        else if(_l > mid)
-        {
-            return queryMin(_l, _r, (i << 1) | 1);
-        }
-        else
-        {
-            return min(queryMin(_l, mid, i << 1), queryMin(mid + 1, _r, (i << 1) | 1));
-        }
-    }
-    int queryMax(int _l, int _r, int i = 1)
-    {
-        if(sty[i].l == _l && sty[i].r == _r)
-        {
-            return sty[i].Max;
-        }
-        int mid = (sty[i].l + sty[i].r) / 2;
-        if(_r <= mid)
-        {
-            return queryMax(_l, _r, i << 1);
-        }
-        else if(_l > mid)
-        {
-            return queryMax(_l, _r, (i << 1) | 1);
-        }
-        else
-        {
-            return max(queryMax(_l, mid, i << 1), queryMax(mid + 1, _r, (i << 1) | 1));
-        }
-    }
-} stx[NV * 4];
-
-int n;
-void build(int l, int r, int i = 1)
-{
-    stx[i].l = l;
-    stx[i].r = r;
-    stx[i].build(1, n);
-    if(l == r)
-    {
-        locx[l] = i;
-        return;
-    }
-    int mid = (l + r) / 2;
-    build(l, mid, i << 1);
-    build(mid + 1, r, (i << 1) | 1);
-}
-
-void modify(int x, int y, int val)
-{
-    int tx = locx[x];
-    int ty = locy[y];
-    stx[tx].sty[ty].Min = stx[tx].sty[ty].Max = val;
-    for(int i = tx; i; i >>= 1)
-    {
-        for(int j = ty; j; j >>= 1)
-        {
-            if(i == tx && j == ty)
-            {
-                continue;
-            }
-            if(j == ty)
-            {
-                stx[i].sty[j].Min = min(stx[i << 1].sty[j].Min, stx[(i << 1) | 1].sty[j].Min);
-                stx[i].sty[j].Max = max(stx[i << 1].sty[j].Max, stx[(i << 1) | 1].sty[j].Max);
-            }
-            else
-            {
-                stx[i].sty[j].Min = min(stx[i].sty[j << 1].Min, stx[i].sty[(j << 1) | 1].Min);
-                stx[i].sty[j].Max = max(stx[i].sty[j << 1].Max, stx[i].sty[(j << 1) | 1].Max);
-            }
-        }
+        int mid = (l + r) >> 1;
+        SubBuild(t, lson);
+        SubBuild(t, rson);
     }
 }
 
-int queryMin(int x1, int x2, int y1, int y2, int i = 1)
+void Build(int l, int r, int rt)
 {
-    if(stx[i].l == x1 && stx[i].r == x2)
+    SubBuild(rt, 1, n, 1);
+    if (l != r)
     {
-        return stx[i].queryMin(y1, y2);
+        int mid = (l + r) >> 1;
+        Build(lson);
+        Build(rson);
     }
-    int mid = (stx[i].l + stx[i].r) / 2;
-    if(x2 <= mid)
-    {
-        return queryMin(x1, x2, y1, y2, i << 1);
-    }
-    else if(x1 > mid)
-    {
-        return queryMin(x1, x2, y1, y2, (i << 1) | 1);
-    }
+}
+
+void SubUpdate(int y, int val, int t, int l, int r, int rt)
+{
+    if (l == r) sum[t][rt] = max(sum[t][rt], val);
     else
     {
-        return min(queryMin(x1, mid, y1, y2, i << 1), queryMin(mid + 1, x2, y1, y2, (i << 1) | 1));
+        int mid = (l + r) >> 1;
+        if (y <= mid) SubUpdate(y, val, t, lson);
+        else SubUpdate(y, val, t, rson);
+        sum[t][rt] = max(sum[t][rt << 1], sum[t][rt << 1 | 1]);
     }
 }
 
-int queryMax(int x1, int x2, int y1, int y2, int i = 1)
+void Update(int x, int y, int val, int l, int r, int rt)
 {
-    if(stx[i].l == x1 && stx[i].r == x2)
+    SubUpdate(y, val, rt, 1, n, 1);
+    if (l != r)
     {
-        return stx[i].queryMax(y1, y2);
+        int mid = (l + r) >> 1;
+        if (x <= mid) Update(x, y, val, lson);
+        else Update(x, y, val, rson);
     }
-    int mid = (stx[i].l + stx[i].r) / 2;
-    if(x2 <= mid)
-    {
-        return queryMax(x1, x2, y1, y2, i << 1);
-    }
-    else if(x1 > mid)
-    {
-        return queryMax(x1, x2, y1, y2, (i << 1) | 1);
-    }
-    else
-    {
-        return max(queryMax(x1, mid, y1, y2, i << 1), queryMax(mid + 1, x2, y1, y2, (i << 1) | 1));
-    }
+}
+
+int SubQuery(int LY, int RY, int t, int l, int r, int rt)
+{
+    if (LY <= l && RY >= r) return sum[t][rt];
+    int mid = (l + r) >> 1;
+    int ans = -1;
+    if (LY <= mid) ans = max(ans, SubQuery(LY, RY, t, lson));
+    if (RY > mid ) ans = max(ans, SubQuery(LY, RY, t, rson));
+    return ans;
+}
+
+int Query(int LX, int RX, int LY, int RY, int l, int r, int rt)
+{
+    if (LX <= l && RX >= r) return SubQuery(LY, RY, rt, 0, n, 1);
+    int mid = (l + r) >> 1;
+    int ans = -1;
+    if (LX <= mid) ans = max(ans, Query(LX, RX, LY, RY, lson));
+    if (RX > mid ) ans = max(ans, Query(LX, RX, LY, RY, rson));
+    return ans;
 }

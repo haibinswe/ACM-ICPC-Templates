@@ -1,49 +1,40 @@
 const int LEN = 1005;
-int f[LEN], rk[LEN];
+int father[LEN], rk[LEN];
 //非递归
-int finds(int x)
+int findset(int x)
 {
     int k, j, r;
     r = x;
-    while(r != f[r])
+    while (r != father[r])
     {
-        r = f[r];
+        r = father[r];
     }
     k = x;
-    while(k != r)
+    while (k != r)
     {
-        j = f[k];
-        f[k] = r;
+        j = father[k];
+        father[k] = r;
         k = j;
     }
     return r;
 }
 
 //递归
-int finds(int x)
+int findset(int x)
 {
-    return f[x] == x ? x : f[x] = finds(f[x]);
+    return father[x] == x ? x : father[x] = findset(father[x]);
 }
 
-void join(int a, int b)
+void unionset(int a, int b)
 {
-    a = finds(a);
-    b = finds(b);
-    if (a == b)
-    {
-        return;
-    }
-    if (rk[a] > rk[b])
-    {
-        f[b] = a;
-    }
+    a = findset(a);
+    b = findset(b);
+    if (a == b) return;
+    if (rk[a] > rk[b]) father[b] = a;
     else
     {
-        if (rk[a] == rk[b])
-        {
-            rk[b]++;
-        }
-        f[a] = b;
+        if (rk[a] == rk[b]) rk[b]++;
+        father[a] = b;
     }
 }
 
@@ -52,6 +43,6 @@ void init(int n)
     memset(rk, 0, sizeof(rk));
     for (int i = 1; i <= n; i++)
     {
-        f[i] = i;
+        father[i] = i;
     }
 }

@@ -1,5 +1,5 @@
 const int NV = 200005;
-template<typename T>
+template <typename T>
 struct SBT
 {
     int sz[NV];
@@ -95,7 +95,7 @@ struct SBT
     T DeleteMax()
     {
         int t = rt;
-        if(rc[rt] == 0)
+        if (rc[rt] == 0)
         {
             rt = lc[rt];
             return K[t];
@@ -113,7 +113,7 @@ struct SBT
     T DeleteMin()
     {
         int t = rt;
-        if(lc[rt] == 0)
+        if (lc[rt] == 0)
         {
             rt = rc[rt];
             return K[t];
@@ -131,37 +131,22 @@ struct SBT
 private:
     void Build(int &rt, int s, int e)
     {
-        if(s > e)
-        {
-            return;
-        }
+        if (s > e) return;
         int mid = (s + e) / 2;
         rt = ++tsz;
         K[rt] = mid;
         lc[rt] = 0;
         rc[rt] = 0;
         sz[rt] = e - s + 1;
-        if(s == e)
-        {
-            return;
-        }
+        if (s == e) return;
         Build(lc[rt], s, mid - 1);
         Build(rc[rt], mid + 1, e);
     }
     bool Find(int &rt, T key)
     {
-        if (rt == 0)
-        {
-            return false;
-        }
-        else if (key < K[rt])
-        {
-            return Find(lc[rt], key);
-        }
-        else
-        {
-            return K[rt] == key || Find(rc[rt], key);
-        }
+        if (rt == 0) return false;
+        else if (key < K[rt]) return Find(lc[rt], key);
+        else return K[rt] == key || Find(rc[rt], key);
     }
     void Insert(int &rt, T key)
     {
@@ -174,14 +159,8 @@ private:
             return;
         }
         sz[rt]++;
-        if (key < K[rt])
-        {
-            Insert(lc[rt], key);
-        }
-        else
-        {
-            Insert(rc[rt], key);
-        }
+        if (key < K[rt]) Insert(lc[rt], key);
+        else Insert(rc[rt], key);
         maintain(rt, !(key < K[rt]));
     }
     T Delete(int &rt, T key)
@@ -190,34 +169,19 @@ private:
         if ((K[rt] == key) || (key < K[rt] && lc[rt] == 0) || (K[rt] < key && rc[rt] == 0))
         {
             T ret = K[rt];
-            if (lc[rt] == 0 || rc[rt] == 0)
-            {
-                rt = lc[rt] + rc[rt];
-            }
-            else
-            {
-                K[rt] = Delete(lc[rt], K[rt] + 1);
-            }
+            if (lc[rt] == 0 || rc[rt] == 0) rt = lc[rt] + rc[rt];
+            else K[rt] = Delete(lc[rt], K[rt] + 1);
             return ret;
         }
         else
         {
-            if (key < K[rt])
-            {
-                return Delete(lc[rt], key);
-            }
-            else
-            {
-                return Delete(rc[rt], key);
-            }
+            if (key < K[rt]) return Delete(lc[rt], key);
+            else return Delete(rc[rt], key);
         }
     }
     void DeleteLess(int &rt, T key)
     {
-        if (rt == 0)
-        {
-            return;
-        }
+        if (rt == 0) return;
         if (K[rt] < key)
         {
             rt = rc[rt];
@@ -231,10 +195,7 @@ private:
     }
     void DeleteGreater(int &rt, T key)
     {
-        if (rt == 0)
-        {
-            return;
-        }
+        if (rt == 0) return;
         if (K[rt] > key)
         {
             rt = lc[rt];
@@ -248,33 +209,15 @@ private:
     }
     int Rank(int &rt, T key)
     {
-        if (K[rt] == key)
-        {
-            return sz[lc[rt]] + 1;
-        }
-        else if (key < K[rt])
-        {
-            return Rank(lc[rt], key);
-        }
-        else
-        {
-            return sz[lc[rt]] + 1 + Rank(rc[rt], key);
-        }
+        if (K[rt] == key) return sz[lc[rt]] + 1;
+        else if (key < K[rt]) return Rank(lc[rt], key);
+        else return sz[lc[rt]] + 1 + Rank(rc[rt], key);
     }
     T Select(int &rt, int k)
     {
-        if (sz[lc[rt]] + 1 == k)
-        {
-            return K[rt];
-        }
-        else if (k > sz[lc[rt]])
-        {
-            return Select(rc[rt], k - 1 - sz[lc[rt]]);
-        }
-        else
-        {
-            return Select(lc[rt], k);
-        }
+        if (sz[lc[rt]] + 1 == k) return K[rt];
+        else if (k > sz[lc[rt]]) return Select(rc[rt], k - 1 - sz[lc[rt]]);
+        else return Select(lc[rt], k);
     }
     T DeleteSelect(int &rt, int k)
     {
@@ -282,64 +225,34 @@ private:
         if (sz[lc[rt]] + 1 == k)
         {
             T ret = K[rt];
-            if (lc[rt] == 0 || rc[rt] == 0)
-            {
-                rt = lc[rt] + rc[rt];
-            }
-            else
-            {
-                K[rt] = Delete(lc[rt], K[rt] + 1);
-            }
+            if (lc[rt] == 0 || rc[rt] == 0) rt = lc[rt] + rc[rt];
+            else K[rt] = Delete(lc[rt], K[rt] + 1);
             return ret;
         }
-        else if (k > sz[lc[rt]])
-        {
-            return DeleteSelect(rc[rt], k - 1 - sz[lc[rt]]);
-        }
-        else
-        {
-            return DeleteSelect(lc[rt], k);
-        }
+        else if (k > sz[lc[rt]]) return DeleteSelect(rc[rt], k - 1 - sz[lc[rt]]);
+        else return DeleteSelect(lc[rt], k);
     }
     T pred(int &rt, T key)
     {
-        if (rt == 0)
-        {
-            return key;
-        }
+        if (rt == 0) return key;
         else if (key > K[rt])
         {
             T ret = pred(rc[rt], key);
-            if(ret == key)
-            {
-                return K[rt];
-            }
+            if (ret == key) return K[rt];
             return ret;
         }
-        else
-        {
-            return pred(lc[rt], key);
-        }
+        else return pred(lc[rt], key);
     }
     T succ(int &rt, T key)
     {
-        if (rt == 0)
-        {
-            return key;
-        }
+        if (rt == 0) return key;
         else if (K[rt] > key)
         {
             T ret = succ(lc[rt], key);
-            if (ret == key)
-            {
-                return K[rt];
-            }
+            if (ret == key) return K[rt];
             return ret;
         }
-        else
-        {
-            return succ(rc[rt], key);
-        }
+        else return succ(rc[rt], key);
     }
     void zag(int &rt)  //LeftRotate
     {
@@ -361,41 +274,26 @@ private:
     }
     void maintain(int &rt, bool flag)
     {
-        if (rt == 0)
-        {
-            return;
-        }
+        if (rt == 0) return;
         if (!flag)
         {
-            if (sz[lc[lc[rt]]] > sz[rc[rt]])
-            {
-                zig(rt);
-            }
+            if (sz[lc[lc[rt]]] > sz[rc[rt]]) zig(rt);
             else if (sz[rc[lc[rt]]] > sz[rc[rt]])
             {
                 zag(lc[rt]);
                 zig(rt);
             }
-            else
-            {
-                return;
-            }
+            else return;
         }
         else
         {
-            if (sz[rc[rc[rt]]] > sz[lc[rt]])
-            {
-                zag(rt);
-            }
+            if (sz[rc[rc[rt]]] > sz[lc[rt]]) zag(rt);
             else if (sz[lc[rc[rt]]] > sz[lc[rt]])
             {
                 zig(rc[rt]);
                 zag(rt);
             }
-            else
-            {
-                return;
-            }
+            else return;
         }
         maintain(lc[rt], false);
         maintain(rc[rt], true);
@@ -404,10 +302,7 @@ private:
     }
     void inorder(int &rt)
     {
-        if(rt == 0)
-        {
-            return;
-        }
+        if (rt == 0) return;
         else
         {
             inorder(lc[rt]);
@@ -419,7 +314,7 @@ private:
 struct node
 {
     int key, id;
-    node(int key = 0, int id = 0): key(key), id(id) {}
+    node(int key = 0, int id = 0): key(key), id(id) { }
     bool operator <(node b)
     {
         return key < b.key;

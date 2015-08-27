@@ -1,3 +1,4 @@
+//区间更新区间求和
 #define lson l,m,rt<<1
 #define rson m+1,r,rt<<1|1
 const int NV = 100005;
@@ -6,7 +7,6 @@ void PushUp(int rt)
 {
     sum[rt] = sum[rt << 1] + sum[rt << 1 | 1];
 }
-
 void PushDown(int rt, int m)
 {
     if (add[rt])
@@ -18,8 +18,7 @@ void PushDown(int rt, int m)
         add[rt] = 0;
     }
 }
-
-void build(int l, int r, int rt = 1)
+void Build(int l, int r, int rt = 1)
 {
     add[rt] = 0;
     if (l == r)
@@ -28,12 +27,11 @@ void build(int l, int r, int rt = 1)
         return ;
     }
     int m = (l + r) >> 1;
-    build(lson);
-    build(rson);
+    Build(lson);
+    Build(rson);
     PushUp(rt);
 }
-
-void update(int L, int R, int c, int l, int r, int rt = 1)
+void Update(int L, int R, int c, int l, int r, int rt = 1)
 {
     if (L <= l && r <= R)
     {
@@ -43,33 +41,18 @@ void update(int L, int R, int c, int l, int r, int rt = 1)
     }
     PushDown(rt , r - l + 1);
     int m = (l + r) >> 1;
-    if (L <= m)
-    {
-        update(L , R , c , lson);
-    }
-    if (m < R)
-    {
-        update(L , R , c , rson);
-    }
+    if (L <= m) Update(L, R, c, lson);
+    if (m < R) Update(L, R, c, rson);
     PushUp(rt);
 }
 
-int query(int L, int R, int l, int r, int rt = 1)
+int Query(int L, int R, int l, int r, int rt = 1)
 {
-    if (L <= l && r <= R)
-    {
-        return sum[rt];
-    }
-    PushDown(rt , r - l + 1);
+    if (L <= l && r <= R) return sum[rt];
+    PushDown(rt, r - l + 1);
     int m = (l + r) >> 1;
     int ret = 0;
-    if (L <= m)
-    {
-        ret += query(L , R , lson);
-    }
-    if (m < R)
-    {
-        ret += query(L , R , rson);
-    }
+    if (L <= m) ret += Query(L, R, lson);
+    if (m < R) ret += Query(L, R, rson);
     return ret;
 }

@@ -1,45 +1,27 @@
+//不要忘记初始化bit[]数组
 int N;
 const int NV = 500005;
-int c[NV];
+int bit[NV];
 inline int lowbit(int x)
 {
     return x & (-x);
 }
 
-void update(int x, int v)
+void update(int x, int delta)
 {
-    while(x <= N)
+    for (int i = x; i <= N; i += lowbit(i))
     {
-        c[x] += v;
-        x += lowbit(x);
+        bit[i] += delta;
     }
 }
 
-int query(int x)
+int query(int k)
 {
     int ans = 0;
-    while(x > 0)
+    for (int i = k; i > 0; i -= lowbit(i))
     {
-        ans += c[x];
-        x -= lowbit(x);
+        ans += bit[i];
     }
     return ans;
 }
 
-int findkth(int k)
-{
-    int idx = 0;
-    for(int i = 20; i >= 0; i--)
-    {
-        idx |= 1 << i;
-        if(idx <= N && c[idx] < k)
-        {
-            k -= c[idx];
-        }
-        else
-        {
-            idx ^= 1 << i;
-        }
-    }
-    return idx + 1;
-}
