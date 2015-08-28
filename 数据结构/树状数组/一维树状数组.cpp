@@ -1,7 +1,5 @@
 //不要忘记初始化bit[]数组
-int N;
-const int NV = 500005;
-int bit[NV];
+int bit[50005], N;
 inline int lowbit(int x)
 {
     return x & (-x);

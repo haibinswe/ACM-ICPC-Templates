@@ -1,4 +1,4 @@
-const int NV = 255;
+﻿const int NV = 255;
 const int NVB = 20;
 int mx[NVB][NV][NV], mn[NVB][NV][NV], a[NV][NV], mxt, mnt;
 void init(int data[][NV], int n)
@@ -40,17 +40,17 @@ void query(int row, int col, int b)
 int main()
 {
     int n, b, q;
-    while(scanf("%d%d%d", &n, &b, &q) != EOF)
+    while (scanf("%d%d%d", &n, &b, &q) != EOF)
     {
-        for(int i = 1; i <= n; i++)
+        for (int i = 1; i <= n; i++)
         {
-            for(int j = 1; j <= n; j++)
+            for (int j = 1; j <= n; j++)
             {
                 scanf("%d", &a[i][j]);
             }
         }
         init(a, n);
-        while(q--)
+        while (q--)
         {
             int r, c;
             scanf("%d%d", &r, &c);

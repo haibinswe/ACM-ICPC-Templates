@@ -21,12 +21,6 @@ void init(int data[], int n)
 int query(int l, int r, int flag)
 {
     int k = log2(r - l + 1);
-    if (flag)
-    {
-        return max(mx[k][l], mx[k][r - (1 << k) + 1]);
-    }
-    else
-    {
-        return min(mn[k][l], mn[k][r - (1 << k) + 1]);
-    }
+    if (flag) return max(mx[k][l], mx[k][r - (1 << k) + 1]);
+    else return min(mn[k][l], mn[k][r - (1 << k) + 1]);
 }
