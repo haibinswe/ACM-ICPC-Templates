@@ -29,13 +29,9 @@ unsigned int APHash(char *str)
     for (int i = 0; *str; i++)
     {
         if ((i & 1) == 0)
-        {
             hash ^= ((hash << 7) ^ (*str++) ^ (hash >> 3));
-        }
         else
-        {
             hash ^= (~((hash << 11) ^ (*str++) ^ (hash >> 5)));
-        }
     }
     return (hash & 0x7FFFFFFF);
 }
@@ -100,9 +96,7 @@ unsigned int PJWHash(char *str)
     {
         hash = (hash << OneEighth) + (*str++);
         if ((test = hash & HighBits) != 0)
-        {
             hash = ((hash ^ (test >> ThreeQuarters)) & (~HighBits));
-        }
     }
     return (hash & 0x7FFFFFFF);
 }
