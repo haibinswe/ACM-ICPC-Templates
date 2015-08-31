@@ -1,20 +1,18 @@
-typedef int mytype;
 const int NV = 105;
 const int NE = 10005 * 2;
-mytype dis[NV];
-int pre[NV], vis[NV], vcnt[NV], he[NV], ecnt, flag;
-struct edge
+int dis[NV];
+int pre[NV], vis[NV], vcnt[NV], head[NV], ecnt, flag;
+struct Edge
 {
-    int v, next;
-    mytype l;
+    int v, next, l;
 } E[NE];
 
-void adde(int u, int v, mytype l)
+void AddEdge(int u, int v, int l)
 {
     E[++ecnt].v = v;
     E[ecnt].l = l;
-    E[ecnt].next = he[u];
-    he[u] = ecnt;
+    E[ecnt].next = head[u];
+    head[u] = ecnt;
 }
 
 void init(int n, int m, int s)
@@ -23,7 +21,7 @@ void init(int n, int m, int s)
     memset(pre, 0, sizeof(pre));
     memset(vis, 0, sizeof(vis));
     memset(vcnt, 0, sizeof(vcnt));
-    memset(he, -1, sizeof(he));
+    memset(head, -1, sizeof(head));
     for (int i = 0; i <= n; i++)
     {
         dis[i] = inf;
@@ -31,15 +29,14 @@ void init(int n, int m, int s)
     dis[s] = 0;
     for (int i = 1; i <= m; i++)
     {
-        int u, v;
-        mytype l;
+        int u, v, l;
         scanf("%d%d%d", &u, &v, &l);
-        adde(u, v, l);
-        adde(v, u, l);
+        AddEdge(u, v, l);
+        AddEdge(v, u, l);
     }
 }
 
-void spfa(int n, int m, int s)
+void SPFA(int n, int m, int s)
 {
     queue<int> q;
     vis[s] = 1;
@@ -50,12 +47,13 @@ void spfa(int n, int m, int s)
         int u = q.front();
         q.pop();
         vis[u] = 0;
-        if(vcnt[u] >= n)
+        if (vcnt[u] >= n)
         {
             flag = 1;
             break;
         }
         for (int i = he[u]; i != -1; i = E[i].next)
+        {
             if (dis[u] + E[i].l < dis[E[i].v])
             {
                 dis[E[i].v] = dis[u] + E[i].l;
@@ -67,5 +65,6 @@ void spfa(int n, int m, int s)
                     vcnt[E[i].v]++;
                 }
             }
+        }
     }
 }

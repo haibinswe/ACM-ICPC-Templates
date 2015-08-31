@@ -1,14 +1,12 @@
-typedef int mytype;
 const int NV = 1005;
 const int NE = NV * NV;
-struct edge
+struct Edge
 {
-    int u, v;
-    mytype l;
+    int u, v, l;
 } E[NE];
 
 int pre[NV], ID[NV], vis[NV];
-mytype In[NV];
+int In[NV];
 void init(int m)
 {
     for (int i = 1; i <= m; i++)
@@ -17,10 +15,9 @@ void init(int m)
     }
 }
 
-mytype Directed_MST(int root, int NV, int NE)
+int Directed_MST(int root, int NV, int NE)
 {
-    //memset(pre,0,sizeof(pre));
-    mytype ret = 0;
+    int ret = 0;
     while (true)
     {
         //1.找最小入边
@@ -40,14 +37,9 @@ mytype Directed_MST(int root, int NV, int NE)
         }
         for (int i = 1; i <= NV; i++)
         {
-            if (i == root)
-            {
-                continue;
-            }
-            if (fabs(In[i] - inf) < eps)
-            {
-                return -1;    //除了跟以外有点没有入边,则根无法到达它
-            }
+            if (i == root) continue;
+            //除了跟以外有点没有入边,则根无法到达它
+            if (fabs(In[i] - inf) < eps) return -1;
         }
         //2.找环
         int cntnode = 0;
@@ -67,21 +59,13 @@ mytype Directed_MST(int root, int NV, int NE)
             {
                 ID[v] = ++cntnode;
                 for (int u = pre[v] ; u != v ; u = pre[u])
-                {
                     ID[u] = cntnode;
-                }
             }
         }
-        if (cntnode == 0)
-        {
-            break;    //无环
-        }
+        if (cntnode == 0) break;    //无环
         for (int i = 1; i <= NV; i++)
         {
-            if (ID[i] == -1)
-            {
-                ID[i] = ++cntnode;
-            }
+            if (ID[i] == -1) ID[i] = ++cntnode;
         }
         //3.缩点,重新标记
         for (int i = 1; i <= NE; i++)
@@ -89,10 +73,7 @@ mytype Directed_MST(int root, int NV, int NE)
             int v = E[i].v;
             E[i].u = ID[E[i].u];
             E[i].v = ID[E[i].v];
-            if (E[i].u != E[i].v)
-            {
-                E[i].l -= In[v];
-            }
+            if (E[i].u != E[i].v) E[i].l -= In[v];
         }
         NV = cntnode;
         root = ID[root];
@@ -100,7 +81,7 @@ mytype Directed_MST(int root, int NV, int NE)
     return ret;
 }
 
-bool judge(mytype ans)
+bool judge(int ans)
 {
     return fabs(ans + 1) > eps;
 }

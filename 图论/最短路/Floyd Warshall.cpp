@@ -1,29 +1,20 @@
 const int N = 1005;
-int g[N][N], path[N][N];
+int g[N][N], f[N][N], path[N][N];
 void init(int n, int m)
 {
     for (int i = 1; i <= n; i++)
+    {
         for (int j = 1; j <= n; j++)
-        {
-            g[i][j] = inf;
-            if (i == j)
-            {
-                g[i][j] = 0;
-            }
-        }
+            g[i][j] = i == j ? 0 : inf;
+    }
     for (int i = 1; i <= m; i++)
     {
         int u, v, l;
         scanf("%d%d%d", &u, &v, &l);
-        if (l < g[u][v])
-        {
-            g[u][v] = l;
-        }
-        if (l < g[v][u])
-        {
-            g[v][u] = l;
-        }
+        g[u][v] = l;
+        g[v][u] = l;
     }
+    memcpy(f, g, sizeof(g));
 }
 
 void FloydWarshall(int n)
@@ -34,10 +25,8 @@ void FloydWarshall(int n)
         {
             for (int j = 1; j <= n; j++)
             {
-                if (g[i][k] != inf && g[k][j] != inf && g[i][k] + g[k][j] < g[i][j])
-                {
-                    g[i][j] = g[i][k] + g[k][j], path[i][j] = path[i][k];
-                }
+                if (f[i][k] != inf && f[k][j] != inf && f[i][k] + f[k][j] < f[i][j])
+                    f[i][j] = f[i][k] + f[k][j], path[i][j] = path[i][k];
             }
         }
     }
@@ -47,7 +36,7 @@ void showPath(int u, int v)
 {
     int tmp = u;
     printf("%d", u);
-    while(tmp != v)
+    while (tmp != v)
     {
         printf("-->%d", path[tmp][v]);
         tmp = path[tmp][v];

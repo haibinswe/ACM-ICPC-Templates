@@ -1,115 +1,106 @@
-struct trie
+//HDU 2222
+const int N = 5000005;
+const int M = 26;
+struct AhoCorasickAutomata
 {
-	int next[500010][26], fail[500010], ed[500010];
-	int root, L;
-	int newnode()
-	{
-		for (int i = 0; i < 26; i++)
-			next[L][i] = -1;
-		ed[L++] = 0;
-		return L - 1;
-	}
+    int ch[N][M], fail[N], val[N];
+    int sz;
+    void init()
+    {
+        sz = 1;
+        memset(ch[0], 0, sizeof(ch[0]));
+        memset(val, 0, sizeof(val));
+    }
+    int idx(char c)
+    {
+        return c - 'a';
+    }
+    void insert(char *s)
+    {
+        int n, now = 0;
+        n = strlen(s);
+        for (int i = 0; i < n; i++)
+        {
+            int id = idx(s[i]);
+            if (ch[now][id] == 0)
+            {
+                memset(ch[sz], 0, sizeof(ch[sz]));
+                ch[now][id] = sz++;
+            }
+            now = ch[now][id];
+        }
+        val[now]++;
+    }
+    void build()
+    {
+        queue<int> que;
+        fail[0] = 0;
+        for (int i = 0; i < M; i++)
+        {
+            int u = ch[0][i];
+            if (u)
+            {
+                fail[u] = 0;
+                que.push(u);
+            }
+        }
+        while (!que.empty())
+        {
+            int r = que.front();
+            que.pop();
+            for (int c = 0; c < M; c++)
+            {
+                int u = ch[r][c];
+                if (!u) continue;
+                que.push(u);
+                int v = fail[r];
+                while (v && !ch[v][c]) v = fail[v];
+                fail[u] = ch[v][c];
+            }
+        }
+    }
+    int query(char *s)
+    {
+        int n, now = 0, ans = 0;
+        n = strlen(s);
+        for (int i = 0; i < n; i++)
+        {
+            int id = idx(s[i]);
+            while (now && !ch[now][id])
+            {
+                now = fail[now];
+            }
+            now = ch[now][id];
+            int t = now;
+            while (t && val[t] != -1)
+            {
+                ans += val[t];
+                val[t] = -1;
+                t = fail[t];
+            }
+        }
+        return ans;
+    }
+} ac;
 
-	void init()
-	{
-		L = 0;
-		root = newnode();
-	}
-
-	void insert(char buf[])
-	{
-		int len = strlen(buf);
-		int now = root;
-		for (int i = 0; i < len; i++)
-		{
-			if (next[now][buf[i] - 'a'] == -1)
-				next[now][buf[i] - 'a'] = newnode();
-			now = next[now][buf[i] - 'a'];
-		}
-		ed[now]++;
-	}
-
-	void build()
-	{
-		queue<int> q;
-		fail[root] = root;
-		for (int i = 0; i < 26; i++)
-		{
-			if (next[root][i] == -1)
-				next[root][i] = root;
-			else
-			{
-				fail[next[root][i]] = root;
-				q.push(next[root][i]);
-			}
-		}
-		while (!q.empty())
-		{
-			int now = q.front();
-			q.pop();
-			for (int i = 0; i < 26; i++)
-			{
-				if (next[now][i] == -1)
-					next[now][i] = next[fail[now]][i];
-				else
-				{
-					fail[next[now][i]] = next[fail[now]][i];
-					q.push(next[now][i]);
-				}
-			}
-		}
-	}
-
-	int query(char buf[])
-	{
-		int len = strlen(buf);
-		int now = root;
-		int res = 0;
-		for (int i = 0; i < len; i++)
-		{
-			now = next[now][buf[i] - 'a'];
-			int temp = now;
-			while (temp != root)
-			{
-				res += ed[temp];
-				ed[temp] = 0;
-				temp = fail[temp];
-			}
-		}
-		return res;
-	}
-
-	void Debug()
-	{
-		for (int i = 0; i < L; i++)
-		{
-			printf("id = %3d,fail = %3d,end = %3d,chi = [", i, fail[i], ed[i]);
-			for (int j = 0; j < 26; j++)
-				printf("%2d", next[i][j]);
-			printf("]\n");
-		}
-	}
-};
-
-char buf[1000010];
-trie ac;
+char buf[1000005];
 int main()
 {
-	int t;
-	int n;
-	scanf("%d", &t);
-	while (t--)
-	{
-		scanf("%d", &n);
-		ac.init();
-		for (int i = 0; i < n; i++)
-		{
-			scanf("%s", buf);
-			ac.insert(buf);
-		}
-		ac.build();
-		scanf("%s", buf);
-		printf("%d\n", ac.query(buf));
-	}
-	return 0;
+    int t;
+    int n;
+    scanf("%d", &t);
+    while (t--)
+    {
+        ac.init();
+        scanf("%d", &n);
+        for (int i = 0; i < n; i++)
+        {
+            scanf("%s", buf);
+            ac.insert(buf);
+        }
+        ac.build();
+        scanf("%s", buf);
+        printf("%d\n", ac.query(buf));
+    }
+    return 0;
 }

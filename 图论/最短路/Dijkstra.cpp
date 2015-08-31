@@ -1,8 +1,6 @@
-typedef int weight_t;
 const int N = 1005;
-int pre[N];
-bool vis[N];
-weight_t dis[N], g[N][N];
+int pre[N], vis[N];
+int dis[N], g[N][N];
 void init(int n, int m, int s)
 {
     memset(pre, 0, sizeof(pre));
@@ -35,8 +33,7 @@ void Dijkstra(int n)
         int u = 0;
         for (int j = 1; j <= n; j++)
         {
-            if (!vis[j] && dis[j] < dis[u])
-                u = j;
+            if (!vis[j] && dis[j] < dis[u]) u = j;
         }
         vis[u] = true;
         for (int j = 1; j <= n; j++)
@@ -54,7 +51,7 @@ void Print(int s, int v)
 {
     //°´Ë³ÐòÊä³öµã
     stack<int> path;
-	if (pre[v])
+    if (pre[v])
     {
         while (v != s)
         {
@@ -69,5 +66,5 @@ void Print(int s, int v)
         printf("%d ", path.top());
         path.pop();
     }
-	printf("\n");
+    printf("\n");
 }

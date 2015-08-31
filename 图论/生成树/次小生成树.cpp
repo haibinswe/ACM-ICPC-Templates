@@ -1,11 +1,13 @@
-typedef int mytype;
 const int NV = 1005;
 int pre[NV], vis[NV];
-mytype dis[NV], g[NV][NV];
+int dis[NV], g[NV][NV], f[NV][NV];
+int use[NV][NV];
 void init(int n, int m, int s)
 {
-    memset(pre, 0, sizeof(pre));
+    memset(pre, -1, sizeof(pre));
     memset(vis, 0, sizeof(vis));
+    memset(use, 0, sizeof(use));
+    memset(f, 0, sizeof(f));
     for (int i = 0; i <= n; i++)
     {
         dis[i] = inf;
@@ -14,9 +16,7 @@ void init(int n, int m, int s)
     for (int i = 1; i <= n; i++)
     {
         for (int j = 1; j <= n; j++)
-        {
             g[i][j] = inf;
-        }
     }
     for (int i = 1; i <= m; i++)
     {
@@ -24,22 +24,32 @@ void init(int n, int m, int s)
         scanf("%d%d%d", &u, &v, &l);
         g[u][v] = l;
         g[v][u] = l;
+        use[v][u] = 1;
+        use[u][v] = 1;
     }
 }
 
-mytype prim(int n)
+int Prim(int n)
 {
-    mytype ans = 0;
+    int ans = 0;
     for (int i = 1; i <= n; i++)
     {
         int u = 0;
         for (int j = 1; j <= n; j++)
         {
-            if (!vis[j] && dis[j] < dis[u])
+            if (!vis[j] && dis[j] < dis[u]) u = j;
+        }
+
+        if (pre[u] != -1)
+        {
+            use[pre[u]][u] = 2;
+            use[u][pre[u]] = 2;
+            for (int j = 1; j <= n; j++)
             {
-                u = j;
+                if (vis[j]) f[j][u] = max(f[j][pre[u]], g[pre[u]][u]);
             }
         }
+
         vis[u] = 1;
         ans += dis[u];
         for (int j = 1; j <= n; j++)
@@ -54,12 +64,15 @@ mytype prim(int n)
     return ans;
 }
 
-bool judge(int n)
+int Prim2nd(int n, int prim)
 {
-    int cnt = 0;
+    int ans = inf;
     for (int i = 1; i <= n; i++)
     {
-        cnt += vis[i];
+        for (int j = 1; j <= n; j++)
+        {
+            if (use[i][j] == 1) ans = min(ans, prim + g[i][j] - f[i][j]);
+        }
     }
-    return cnt == n;
+    return ans;
 }
