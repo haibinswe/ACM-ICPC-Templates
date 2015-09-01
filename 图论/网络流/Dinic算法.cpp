@@ -1,28 +1,35 @@
 const int NV = 20005;
 const int NE = 500005;
-int he[NV], ecnt;
+int head[NV], ecnt;
 int src, sink;
-struct edge
+struct Edge
 {
     int v, next, f;
 } E[2 * NE];
 
-void adde(int u, int v, int c)
+void AddEdge(int u, int v, int c)
 {
     E[++ecnt].v = v;
     E[ecnt].f = c;
-    E[ecnt].next = he[u];
-    he[u] = ecnt;
+    E[ecnt].next = head[u];
+    head[u] = ecnt;
     E[++ecnt].v = u;
     E[ecnt].f = 0;
-    E[ecnt].next = he[v];
-    he[v] = ecnt;
+    E[ecnt].next = head[v];
+    head[v] = ecnt;
 }
 
-void init()
+void init(int n, int m)
 {
     ecnt = 0;
-    memset(he, -1, sizeof(he));
+    memset(head, -1, sizeof(head));
+    src = 1, sink = n;
+    for (int i = 1; i <= m; i++)
+    {
+        int u, v, c;
+        scanf("%d%d%d", &u, &v, &c);
+        AddEdge(u, v, c);
+    }
 }
 
 queue<int> que;
@@ -41,7 +48,7 @@ void bfs()
     {
         int u = que.front();
         que.pop();
-        for (int i = he[u]; i != -1; i = E[i].next)
+        for (int i = head[u]; i != -1; i = E[i].next)
         {
             if (E[i].f && !vis[E[i].v])
             {
@@ -55,14 +62,11 @@ void bfs()
 
 int dfs(int u, int delta)
 {
-    if (u == sink)
-    {
-        return delta;
-    }
+    if (u == sink) return delta;
     else
     {
         int ret = 0;
-        for (int i = he[u]; delta && i != -1; i = E[i].next)
+        for (int i = head[u]; delta && i != -1; i = E[i].next)
         {
             if (E[i].f && dis[E[i].v] == dis[u] + 1)
             {
@@ -84,10 +88,7 @@ int maxflow()
     {
         memset(vis, 0, sizeof(vis));
         bfs();
-        if (!vis[sink])
-        {
-            return ret;
-        }
+        if (!vis[sink]) return ret;
         ret += dfs(src, inf);
     }
 }
