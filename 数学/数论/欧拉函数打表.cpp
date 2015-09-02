@@ -1,19 +1,17 @@
 const int MAXN = 10005;
-long long phi[MAXN];
-void getphi()
+long long eular[MAXN];
+void geteular()
 {
     for (int i = 1; i < MAXN; i++)
     {
-        phi[i] = i;
+        eular[i] = i;
     }
     for (int i = 2; i < MAXN; i++)
     {
-        if (phi[i] == i)
+        if (eular[i] == i)
         {
             for (int j = i; j < MAXN; j += i)
-            {
-                phi[j] = phi[j] / i * (i - 1);
-            }
+                eular[j] = eular[j] / i * (i - 1);
         }
     }
 }

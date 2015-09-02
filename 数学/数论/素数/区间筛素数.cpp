@@ -1,73 +1,51 @@
 /**
- * prime[]:´æ´¢Ğ¡·¶Î§µÄËØÊı±í
- * prime1[]:´æ´¢Ä³Ò»Çø¼äµÄËØÊı±í
- * pcount:Ğ¡·¶Î§ËØÊı±íÖĞËØÊıµÄ¸öÊı
- * pcount1:Ä³Ò»Çø¼äµÄËØÊı±íÖĞËØÊıµÄ¸öÊı
- * in[]¡¢in1[]ÓÃÀ´±ê¼ÇÄ³Ò»¸öÊı×ÖÊÇ·ñÎªËØÊı..
+ * prime[]:å­˜å‚¨å°èŒƒå›´çš„ç´ æ•°è¡¨
+ * prime1[]:å­˜å‚¨æŸä¸€åŒºé—´çš„ç´ æ•°è¡¨
+ * pcount:å°èŒƒå›´ç´ æ•°è¡¨ä¸­ç´ æ•°çš„ä¸ªæ•°
+ * pcount1:æŸä¸€åŒºé—´çš„ç´ æ•°è¡¨ä¸­ç´ æ•°çš„ä¸ªæ•°
+ * in[]ã€in1[]ç”¨æ¥æ ‡è®°æŸä¸€ä¸ªæ•°å­—æ˜¯å¦ä¸ºç´ æ•°..
  */
 const int N = 46500, MN = 1000010;
 long long prime[N], prime1[MN];
 long long pcount, p1count;
 long long in[N], in1[MN];
-
-void getsprime()  //¿ìËÙÉ¸Ğ¡·¶Î§ËØÊı
+void getsprime()  //å¿«é€Ÿç­›å°èŒƒå›´ç´ æ•°
 {
     for (int i = 2; i < N; ++i)
-    {
         in[i] = 1;
-    }
     for (int i = 2; i < N; ++i)
     {
-        if (!in[i])
-        {
-            continue;
-        }
+        if (!in[i]) continue;
         for (int j = i * 2; j < N; j += i)
-        {
             in[j] = 0;
-        }
     }
     pcount = 0;
     for (int i = 2; i < N; ++i)
     {
-        if (in[i])
-        {
-            prime[pcount++] = i;
-        }
+        if (in[i]) prime[pcount++] = i;
     }
 }
 
 void getlprime(long L, long U)
 {
-    if (U < N)   //¼ÙÈçÇø¼äµÄ×î´óÖµ¾ÍĞ¡ÓÚ46500µÄ»°£¬ÄÇÃ´Ö®¼ÊÓÃÎÒÃÇ¸Õ²ÅÇóÍêµÄ¾ÍºÃÁË
+    if (U < N)   //å‡å¦‚åŒºé—´çš„æœ€å¤§å€¼å°±å°äº46500çš„è¯ï¼Œé‚£ä¹ˆä¹‹é™…ç”¨æˆ‘ä»¬åˆšæ‰æ±‚å®Œçš„å°±å¥½äº†
     {
         p1count = 0;
         for (int i = L; i <= U; ++i)
         {
-            if (in[i])
-            {
-                prime1[p1count++] = i;
-            }
+            if (in[i]) prime1[p1count++] = i;
         }
     }
-    else     //É¸´óÊıÇø¼äÄÚµÄËØÊıµÄºËĞÄ²¿·Ö
+    else     //ç­›å¤§æ•°åŒºé—´å†…çš„ç´ æ•°çš„æ ¸å¿ƒéƒ¨åˆ†
     {
         long long k, size = U - L;
         for (long i = 0; i <= size; ++i)
-        {
             in1[i] = 1;
-        }
         for (long i = 0; i <= pcount && prime[i] * prime[i] <= U; ++i)
         {
             k = L / prime[i];
-            if (k * prime[i] < L)
-            {
-                ++k;
-            }
-            if (k <= 1)
-            {
-                ++k;
-            }
+            if (k * prime[i] < L) ++k;
+            if (k <= 1) ++k;
             while (k * prime[i] <= U)
             {
                 in1[k * prime[i] - L] = 0;
@@ -77,10 +55,7 @@ void getlprime(long L, long U)
         p1count = 0;
         for (long i = 0; i <= size; ++i)
         {
-            if (in1[i])
-            {
-                prime1[p1count++] = i + L;
-            }
+            if (in1[i]) prime1[p1count++] = i + L;
         }
     }
 }

@@ -1,4 +1,4 @@
-const int CN = 20;
+const int CN = 30;
 long long c[CN][CN] = {};
 void cinit()
 {
