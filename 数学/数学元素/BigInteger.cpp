@@ -229,7 +229,6 @@ public:
     BigInteger operator - (BigInteger x)
     {
         BigInteger y = *this, ans;
-
         x.SetInteger();
         y.SetInteger();
         int carry = 0, len = y.Integer.size();
@@ -496,22 +495,3 @@ public:
         return ans;
     }
 };
-
-BigInteger f[1005];
-int main()
-{
-    int t, n;
-    f[0] = BigInteger(0);
-    f[1] = BigInteger(1);
-    for (int i = 2; i <= 1000; i++)
-    {
-        f[i] = f[i - 1] + f[i - 2];
-    }
-    scanf("%d", &t);
-    while (t--)
-    {
-        scanf("%d", &n);
-        cout << f[n] << endl;
-    }
-    return 0;
-}

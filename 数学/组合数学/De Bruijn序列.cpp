@@ -5,9 +5,7 @@ void db(int n, int k, vector<int> &v, int a[], int t = 1, int p = 1)
         if (n % p == 0)
         {
             for (int i = 1; i <= p; i++)
-            {
                 v.push_back(a[i]);
-            }
         }
     }
     else

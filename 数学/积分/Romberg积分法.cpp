@@ -1,3 +1,9 @@
+double f(double x)
+{
+    //函数体
+    return ans;
+}
+
 double romberg(double l, double r, double epss = eps)
 {
     vector<double> t;
