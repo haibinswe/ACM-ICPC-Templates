@@ -2,11 +2,10 @@ const int N = 1005;
 int c[N][N], b[N][N];
 int LCSLength(char *x, char *y, int m, int n)
 {
-    int i, j;
     memset(c, 0, sizeof(c));
-    for (i = 1; i <= m; i++)
+    for (int i = 1; i <= m; i++)
     {
-        for (j = 1; j <= n; j++)
+        for (int j = 1; j <= n; j++)
         {
             if (x[i - 1] == y[j - 1])
             {
@@ -30,36 +29,23 @@ int LCSLength(char *x, char *y, int m, int n)
 
 void PrintLCS(char *x, int i, int j)
 {
-    if (i == 0 || j == 0)
-    {
-        return;
-    }
+    if (i == 0 || j == 0) return;
     if (b[i][j] == 0)
     {
         PrintLCS(x, i - 1, j - 1);
         printf("%c ", x[i - 1]);
     }
-    else if (b[i][j] == 1)
-    {
-        PrintLCS(x, i - 1, j);
-    }
-    else
-    {
-        PrintLCS(x, i, j - 1);
-    }
+    else if (b[i][j] == 1) PrintLCS(x, i - 1, j);
+    else PrintLCS(x, i, j - 1);
 }
 
 int main()
 {
     char x[50] = {"ABCBDAB"};
     char y[50] = {"BDCABA"};
-    int m, n;
-
-    m = strlen(x);
-    n = strlen(y);
-
+    int m = strlen(x);
+    int n = strlen(y);
     printf("%d\n", LCSLength(x, y, m, n));
     PrintLCS(x, m, n);
-
     return 0;
 }

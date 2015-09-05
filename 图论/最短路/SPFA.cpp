@@ -52,7 +52,7 @@ void SPFA(int n, int m, int s)
             flag = 1;
             break;
         }
-        for (int i = he[u]; i != -1; i = E[i].next)
+        for (int i = head[u]; i != -1; i = E[i].next)
         {
             if (dis[u] + E[i].l < dis[E[i].v])
             {

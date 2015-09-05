@@ -13,7 +13,7 @@ int main()
     {
         int N, V;
         memset(dp, 0, sizeof(dp));
-		//物品数量   最大容量
+        //物品数量   最大容量
         scanf("%d%d", &N, &V);
         for (int i = 1; i <= N; i++)
         {

@@ -1,5 +1,4 @@
 const int MAXN = 100005;
-// 分治算法求最近点对
 struct point
 {
     double x, y;
@@ -67,10 +66,10 @@ void init(int n)
 int main()
 {
     int n;
-    while (cin >> n, n != 0)
+    while (~scanf("%d", &n) && n)
     {
         init(n);
-        printf("%.2lf\n", closest(0, n - 1) / 2);
+        printf("%.2f\n", closest(0, n - 1) / 2);
     }
     return 0;
 }

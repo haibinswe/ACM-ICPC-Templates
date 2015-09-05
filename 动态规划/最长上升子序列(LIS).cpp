@@ -1,6 +1,6 @@
 //O(n^2)
 const int N = 1005;
-int dp[N];      //dp[i]记录到[0, i]数组的LIS
+int dp[N];      //dp[i]记录[0, i]数组的LIS
 int lis = 1;    //LIS长度
 int LIS(int * arr, int size)
 {
@@ -17,10 +17,7 @@ int LIS(int * arr, int size)
             if (arr[j] < arr[i] && dp[i] < dp[j] + 1)
             {
                 dp[i] = dp[j] + 1;
-                if (dp[i] > lis)
-                {
-                    lis = dp[i];
-                }
+                lis = max(dp[i], lis);
             }
         }
     }
@@ -28,24 +25,17 @@ int LIS(int * arr, int size)
 }
 
 //输出LIS
-//存在疑问
-void outputLIS(int * arr, int index)
+void PrintLIS(int * arr, int index)
 {
-    bool isLIS = 0;
-    if (index < 0 || lis == 0)
-    {
-        return;
-    }
+    bool isLIS = false;
+    if (index < 0 || lis == 0) return;
     if (dp[index] == lis)
     {
         --lis;
-        isLIS = 1;
+        isLIS = true;
     }
-    outputLIS(arr, --index);
-    if (isLIS)
-    {
-        printf("%d ", arr[index + 1]);
-    }
+    PrintLIS(arr, --index);
+    if (isLIS) printf("%d ", arr[index + 1]);
 }
 
 //O(nlogn)
@@ -59,10 +49,7 @@ int LIS(int n)
     {
         int pos = upper_bound(dp + 1, dp + len + 1, a[i]) - dp; //找到插入位置
         dp[pos] = a[i];
-        if (len < pos) //按需要更新LIS长度
-        {
-            len = pos;
-        }
+        len = max(len, pos);
     }
     return len;
 }

@@ -68,9 +68,6 @@ struct point
     double arg()
     {
         return atan2(y, x);
-        //double res = atan2(y, x);   //(-pi, pi]
-        //if(res < -pi / 2 + eps) res += 2 * pi; //eps修正精度
-        //return res;
     }
     //逆时针旋转angle弧度
     point rotate(const double &angle)
@@ -152,8 +149,9 @@ struct line
         return sgn(det(b - l.s, l.vec())) * sgn(det(a - l.s, l.vec())) > 0;
     }
     //两直线的交点
-    friend point linexline(const line l1, const line l2) //利用相似三角形对应边成比例
+    friend point linexline(const line l1, const line l2)
     {
+        //利用相似三角形对应边成比例
         double s1 = det(l1.s - l2.s, l2.vec());
         double s2 = det(l1.t - l2.s, l2.vec());
         return (l1.t * s1 - l1.s * s2) / (s1 - s2);
@@ -196,7 +194,7 @@ struct polygon
     {
         p.resize(n);
     }
-    //    polygon(vector<point> &v):p(v){}
+    //polygon(vector<point> &v):p(v){}
     //多边形周长
     double perimeter()
     {
@@ -215,7 +213,7 @@ struct polygon
         {
             sum += det(p[i], p[next(i)]);
         }
-        return sum / 2 + eps; //要加eps吗？
+        return sum / 2 + eps;
     }
     //判断点与多边形的位置关系，0外, 1内,2边上
     int pointin(const point &t)
@@ -241,7 +239,7 @@ struct polygon
         {
             ans = ans + (p[i] + p[next(i)]) * det(p[i], p[next(i)]);
         }
-        return ans / area() / 6 + eps; //要加eps吗？
+        return ans / area() / 6 + eps;
     }
     //多边形边界上格点的数量
     int borderpointnum()
@@ -279,7 +277,7 @@ struct polygon
 struct convex : public polygon
 {
     convex(int n = 0): polygon(n) {}
-    //    convex(vector<point> &v):polygon(v){}
+    //convex(vector<point> &v):polygon(v){}
     //需要先求凸包，若凸包每条边除端点外都有点，则可唯一确定凸包
     bool isunique(vector<point> &v)
     {
