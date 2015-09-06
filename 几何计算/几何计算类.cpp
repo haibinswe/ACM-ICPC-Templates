@@ -20,7 +20,7 @@ inline int sgn(const double &x)
 struct point
 {
     double x, y;
-    point(const double &x = 0, const double &y = 0): x(x), y(y) {}
+    point(const double &x = 0, const double &y = 0): x(x), y(y) { }
     friend point operator + (const point &a, const point &b)
     {
         return point(a.x + b.x, a.y + b.y);
@@ -415,19 +415,14 @@ convex convexhull(vector<point> &a)
     for (int i = 0; i < a.size(); i++)
     {
         //<=0则不含边界，<0则含边界
-        while (m > 1 && sgn(det(res.p[m - 1] - res.p[m - 2], a[i] - res.p[m - 2])) <= 0)
-        {
-            m--;
-        }
+        while (m > 1 && sgn(det(res.p[m - 1] - res.p[m - 2], a[i] - res.p[m - 2])) <= 0) m--;
         res.p[m++] = a[i];
     }
     int k = m;
     for (int i = a.size() - 2; i >= 0; i--)
     {
-        while (m > k && sgn(det(res.p[m - 1] - res.p[m - 2], a[i] - res.p[m - 2])) <= 0)
-        {
-            m--;
-        }
+        //<=0则不含边界，<0则含边界
+        while (m > k && sgn(det(res.p[m - 1] - res.p[m - 2], a[i] - res.p[m - 2])) <= 0) m--;
         res.p[m++] = a[i];
     }
     if (m > 1) m--;
