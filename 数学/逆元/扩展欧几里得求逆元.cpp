@@ -18,9 +18,6 @@ long long inv(long long a)
 {
     long long x, y;
     long long t = exgcd(a, M, x, y);
-    if(t != 1)
-    {
-        return -1;
-    }
+    if (t != 1) return -1;
     return (x % M + M) % M;
 }
