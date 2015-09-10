@@ -16,7 +16,7 @@ Sub CodeFrame()
     
     With Selection.Tables(1).Columns(2)
         .PreferredWidthType = wdPreferredWidthPoints
-        .Width = CentimetersToPoints(13.43)
+        .Width = CentimetersToPoints(15.55)
         With .Shading
             .Texture = wdTextureNone
             .ForegroundPatternColor = wdColorAutomatic
@@ -54,7 +54,7 @@ Sub CodeFrame()
     End With
     With Selection.Tables(1).Columns(1)
         .PreferredWidthType = wdPreferredWidthPoints
-        .Width = CentimetersToPoints(1.2)
+        .Width = CentimetersToPoints(1.43)
         With .Borders(wdBorderLeft)
             .LineStyle = wdLineStyleSingle
             .LineWidth = wdLineWidth050pt

@@ -339,6 +339,20 @@ Sub HighLight()
     End With
     Selection.Find.Execute Replace:=wdReplaceAll, Wrap:=wdFindStop
     With Selection.Find
+        .Text = "new"
+        .Replacement.Text = "new"
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = True
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchByte = True
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+    Selection.Find.Execute Replace:=wdReplaceAll, Wrap:=wdFindStop
+    With Selection.Find
         .Text = "class"
         .Replacement.Text = "class"
         .Forward = True
@@ -510,6 +524,20 @@ Sub HighLight()
     With Selection.Find
         .Text = "operator"
         .Replacement.Text = "operator"
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = True
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchByte = True
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+    Selection.Find.Execute Replace:=wdReplaceAll, Wrap:=wdFindStop
+    With Selection.Find
+        .Text = "friend"
+        .Replacement.Text = "friend"
         .Forward = True
         .Wrap = wdFindContinue
         .Format = True
