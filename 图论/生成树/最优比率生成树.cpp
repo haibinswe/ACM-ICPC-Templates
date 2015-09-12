@@ -1,26 +1,19 @@
 //POJ 2728
-#define MAXV 1010
-#define INF 1e12
-#include <iostream>
-#include <cstdio>
-#include <cstring>
-#include <cmath>
-
-using namespace std;
-
+const double INF = 1e12;
+const int NV = 1010;
 struct Village
 {
     double x, y, h;
-} village[MAXV];
+} village[NV];
 
 struct Map
 {
     double height, dis;
-} map[MAXV][MAXV];
+} g[NV][NV];
 
-bool vis[MAXV];
-int pre[MAXV];
-double dis[MAXV];
+bool vis[NV];
+int pre[NV];
+double dis[NV];
 
 double len(const Village &a, const Village &b)
 {
@@ -29,24 +22,24 @@ double len(const Village &a, const Village &b)
 
 bool prim(int v, double k, double &res)
 {
-    int i, p, s = v - 1;
+    int p, s = v - 1;
     double m, h = 0, d = 0, sum = 0;
     memset(vis, 0, sizeof(vis));
-    for (i = 0; i < v; ++i) dis[i] = INF;
+    for (int i = 0; i < v; i++) dis[i] = INF;
     dis[0] = 0;
     vis[0] = 1;
-    for (i = 1; i < v; ++i)
+    for (int i = 1; i < v; i++)
     {
-        if (dis[i] > map[0][i].height - k * map[0][i].dis)
+        if (dis[i] > g[0][i].height - k * g[0][i].dis)
         {
-            dis[i] = map[0][i].height - k * map[0][i].dis;
+            dis[i] = g[0][i].height - k * g[0][i].dis;
             pre[i] = 0;
         }
     }
     while (s--)
     {
         m = INF + 1;
-        for (i = 1; i < v; ++i)
+        for (int i = 1; i < v; i++)
         {
             if (!vis[i] && m > dis[i])
             {
@@ -54,15 +47,15 @@ bool prim(int v, double k, double &res)
                 p = i;
             }
         }
-        h += map[pre[p]][p].height;
-        d += map[pre[p]][p].dis;
+        h += g[pre[p]][p].height;
+        d += g[pre[p]][p].dis;
         sum += dis[p];
         vis[p] = 1;
-        for (i = 1; i < v; ++i)
+        for (int i = 1; i < v; i++)
         {
-            if (!vis[i] && dis[i] > map[p][i].height - k * map[p][i].dis)
+            if (!vis[i] && dis[i] > g[p][i].height - k * g[p][i].dis)
             {
-                dis[i] = map[p][i].height - k * map[p][i].dis;
+                dis[i] = g[p][i].height - k * g[p][i].dis;
                 pre[i] = p;
             }
         }
@@ -84,25 +77,23 @@ double Dinkelbach(int v)
 
 int main()
 {
-    int n, i, j;
-
-    while (scanf("%d", &n) && n)
+    int n;
+    while (~scanf("%d", &n) && n)
     {
-        for (i = 0; i < n; ++i)
+        for (int i = 0; i < n; i++)
         {
-            scanf("%lf %lf %lf", &village[i].x, &village[i].y, &village[i].h);
+            scanf("%lf%lf%lf", &village[i].x, &village[i].y, &village[i].h);
         }
-        for (i = 0; i < n; ++i)
+        for (int i = 0; i < n; i++)
         {
-            for (j = i + 1; j < n; ++j)
+            for (int j = i + 1; j < n; j++)
             {
-                map[i][j].height = fabs(village[i].h - village[j].h);
-                map[i][j].dis = len(village[i], village[j]);
-                map[j][i] = map[i][j];
+                g[i][j].height = fabs(village[i].h - village[j].h);
+                g[i][j].dis = len(village[i], village[j]);
+                g[j][i] = g[i][j];
             }
         }
-
-        printf("%.3lf\n", Dinkelbach(n));
+        printf("%.3f\n", Dinkelbach(n));
     }
     return 0;
 }
