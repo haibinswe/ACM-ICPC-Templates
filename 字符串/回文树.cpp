@@ -20,7 +20,8 @@ struct PalindromicTree
     }
     inline int FL(int x)
     {
-        while (s[n - len[x] - 1] != s[n]) x = fail[x];
+        while (s[n - len[x] - 1] != s[n])
+            x = fail[x];
         return x;
     }
     void add(char c)
