@@ -16,7 +16,7 @@ bool DFS(int v)
         if (G[i][v])
         {
             if (vis[i] == 1) return false;
-            else if (vis[i] == 0) if (not DFS(i)) return false;
+            else if (!DFS(i)) return false;
         }
     }
     vis[v] = 2;
