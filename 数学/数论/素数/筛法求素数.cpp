@@ -1,4 +1,4 @@
-//Ò»°ãÉ¸·¨
+//ä¸€èˆ¬ç­›æ³•
 const int N = 31700;
 int prime[N], primes[N], cnt = 0;
 void make_prime()
@@ -18,7 +18,7 @@ void make_prime()
     }
 }
 
-//¿ìËÙÏßÐÔÉ¸·¨
+//å¿«é€Ÿçº¿æ€§ç­›æ³•
 const int N = 200000;
 int prime[N] = {0};
 int isNotPrime[N] = {1, 1}, num_prime = 0;
