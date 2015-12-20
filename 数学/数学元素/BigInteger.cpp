@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include <cstdio>
 #include <iostream>
 #include <algorithm>
 using namespace std;
@@ -7,8 +8,8 @@ using namespace std;
 //以下的运算均不支持负数, 负数情况需要在main函数中讨论
 class BigInteger
 {
+    #define base (int)1e9
 private:
-    const static int base = 1e9;
     vector<int> Integer;
     void SetInteger()
     {
