@@ -1,4 +1,4 @@
-//区间更新区间求和
+//鍖洪棿鏇存柊鍖洪棿姹傚拰
 #define lson l,m,rt<<1
 #define rson m+1,r,rt<<1|1
 const int NV = 100005;

@@ -5,7 +5,7 @@
 #include <algorithm>
 using namespace std;
 
-//ÒÔÏÂµÄÔËËã¾ù²»Ö§³Ö¸ºÊı, ¸ºÊıÇé¿öĞèÒªÔÚmainº¯ÊıÖĞÌÖÂÛ
+//ä»¥ä¸‹çš„è¿ç®—å‡ä¸æ”¯æŒè´Ÿæ•°, è´Ÿæ•°æƒ…å†µéœ€è¦åœ¨mainå‡½æ•°ä¸­è®¨è®º
 class BigInteger
 {
     #define base (int)1e9
@@ -38,7 +38,7 @@ private:
 
 public:
     BigInteger() { }
-    //Ê¹ÓÃstring³õÊ¼»¯BigInteger, ²»Ö§³Ö¸ºÊı
+    //ä½¿ç”¨stringåˆå§‹åŒ–BigInteger, ä¸æ”¯æŒè´Ÿæ•°
     BigInteger(string s)
     {
         if (s.size() == 0)
@@ -59,13 +59,13 @@ public:
             Integer.insert(Integer.begin(), v);
         }
     }
-    //Ê¹ÓÃcharÊı×é³õÊ¼»¯BigInteger
+    //ä½¿ç”¨charæ•°ç»„åˆå§‹åŒ–BigInteger
     BigInteger(char c[])
     {
         string s = c;
         new(this) BigInteger(s);
     }
-    //Ê¹ÓÃlong longÀàĞÍ³õÊ¼»¯BigInteger
+    //ä½¿ç”¨long longç±»å‹åˆå§‹åŒ–BigInteger
     BigInteger(long long x)
     {
         string s = "";
@@ -83,12 +83,12 @@ public:
         if (flag) s = '-' + s;
         new(this) BigInteger(s);
     }
-    //Ê¹ÓÃintÀàĞÍ³õÊ¼»¯BigInteger
+    //ä½¿ç”¨intç±»å‹åˆå§‹åŒ–BigInteger
     BigInteger(int x)
     {
         new(this) BigInteger((long long)x);
     }
-    //ÖØÔØÊäÈëÔËËã·û
+    //é‡è½½è¾“å…¥è¿ç®—ç¬¦
     friend istream& operator >> (istream &in, BigInteger &a)
     {
         string s;
@@ -97,20 +97,20 @@ public:
         a = temp;
         return in;
     }
-    //ÖØÔØÊä³öÔËËã·û
+    //é‡è½½è¾“å‡ºè¿ç®—ç¬¦
     friend ostream& operator << (ostream &out, BigInteger a)
     {
         a.PrintInteger();
         return out;
     }
-    //ÖØÔØ=ÔËËã·û
+    //é‡è½½=è¿ç®—ç¬¦
     BigInteger& operator = (const BigInteger &a)
     {
         this->Integer = a.Integer;
         return *this;
     }
 
-    //ÖØÔØ<ÔËËã·û, ÓÃÓÚÁ½¸ö´óÊıÖ®¼äµÄ±È½Ï
+    //é‡è½½<è¿ç®—ç¬¦, ç”¨äºä¸¤ä¸ªå¤§æ•°ä¹‹é—´çš„æ¯”è¾ƒ
     friend bool operator < (BigInteger a, BigInteger b)
     {
         a.SetInteger();
@@ -125,55 +125,55 @@ public:
         }
         return false;
     }
-    //ÖØÔØ<ÔËËã·û, ¿ÉÒÔÓÃÓÚÈÎÒâÀàĞÍµÄ±È½Ï
+    //é‡è½½<è¿ç®—ç¬¦, å¯ä»¥ç”¨äºä»»æ„ç±»å‹çš„æ¯”è¾ƒ
     template <typename T>
     friend bool operator < (BigInteger a, T b)
     {
         BigInteger t((long long)b);
         return a < t;
     }
-    //ÖØÔØ>ÔËËã·û, ÓÃÓÚÁ½¸ö´óÊıÖ®¼äµÄ±È½Ï
+    //é‡è½½>è¿ç®—ç¬¦, ç”¨äºä¸¤ä¸ªå¤§æ•°ä¹‹é—´çš„æ¯”è¾ƒ
     friend bool operator > (BigInteger a, BigInteger b)
     {
         return b < a;
     }
-    //ÖØÔØ>ÔËËã·û, ¿ÉÒÔÓÃÓÚÈÎÒâÀàĞÍµÄ±È½Ï
+    //é‡è½½>è¿ç®—ç¬¦, å¯ä»¥ç”¨äºä»»æ„ç±»å‹çš„æ¯”è¾ƒ
     template <typename T>
     friend bool operator > (BigInteger a, T b)
     {
         BigInteger t((long long)b);
         return t < a;
     }
-    //ÖØÔØ==ÔËËã·û
+    //é‡è½½==è¿ç®—ç¬¦
     friend bool operator == (BigInteger a, BigInteger b)
     {
         return !(a < b) && !(b < a);
     }
-    //ÖØÔØ!=ÔËËã·û
+    //é‡è½½!=è¿ç®—ç¬¦
     friend bool operator != (BigInteger a, BigInteger b)
     {
         return !(a == b);
     }
-    //ÖØÔØ==ÔËËã·û, ¿ÉÒÔÓÃÓÚÈÎÒâÀàĞÍµÄ±È½Ï
+    //é‡è½½==è¿ç®—ç¬¦, å¯ä»¥ç”¨äºä»»æ„ç±»å‹çš„æ¯”è¾ƒ
     template <typename T>
     friend bool operator == (BigInteger a, T b)
     {
         BigInteger t((long long)b);
         return !(a < t) && !(t < a);
     }
-    //ÖØÔØ<=ÔËËã·û, ¿ÉÒÔÓÃÓÚÈÎÒâÀàĞÍµÄ±È½Ï
+    //é‡è½½<=è¿ç®—ç¬¦, å¯ä»¥ç”¨äºä»»æ„ç±»å‹çš„æ¯”è¾ƒ
     template <typename T>
     friend bool operator <= (BigInteger a, T b)
     {
         return a < b || a == b;
     }
-    //ÖØÔØ>=ÔËËã·û, ¿ÉÒÔÓÃÓÚÈÎÒâÀàĞÍµÄ±È½Ï
+    //é‡è½½>=è¿ç®—ç¬¦, å¯ä»¥ç”¨äºä»»æ„ç±»å‹çš„æ¯”è¾ƒ
     template <typename T>
     friend bool operator >= (BigInteger a, T b)
     {
         return b < a || b == a;
     }
-    //ÖØÔØ+ÔËËã·û, ÓÃÓÚÁ½¸ö´óÊıÏà¼Ó
+    //é‡è½½+è¿ç®—ç¬¦, ç”¨äºä¸¤ä¸ªå¤§æ•°ç›¸åŠ 
     BigInteger operator + (BigInteger x)
     {
         BigInteger y = *this, ans;
@@ -192,33 +192,33 @@ public:
         ans.SetInteger();
         return ans;
     }
-    //ÖØÔØ+ÔËËã·û, ÓÃÓÚ´óÊıºÍÈÎÒâÀàĞÍÏà¼Ó
+    //é‡è½½+è¿ç®—ç¬¦, ç”¨äºå¤§æ•°å’Œä»»æ„ç±»å‹ç›¸åŠ 
     template <typename T>
     BigInteger operator + (T x)
     {
         BigInteger t((long long)x);
         return *this + t;
     }
-    //ÖØÔØºóÖÃ++ÔËËã·û
+    //é‡è½½åç½®++è¿ç®—ç¬¦
     const BigInteger operator ++ (int)
     {
         BigInteger t = *this;
         *this = *this + 1;
         return t;
     }
-    //ÖØÔØÇ°ÖÃ++ÔËËã·û
+    //é‡è½½å‰ç½®++è¿ç®—ç¬¦
     BigInteger& operator ++ ()
     {
         *this = *this + 1;
         return *this;
     }
-    //ÖØÔØ+=ÔËËã·û, ÓÃÓÚÁ½¸ö´óÊıÏà¼Ó
+    //é‡è½½+=è¿ç®—ç¬¦, ç”¨äºä¸¤ä¸ªå¤§æ•°ç›¸åŠ 
     BigInteger& operator += (BigInteger x)
     {
         *this = *this + x;
         return *this;
     }
-    //ÖØÔØ+=ÔËËã·û, ÓÃÓÚÈÎÒâÀàĞÍÏà¼Ó
+    //é‡è½½+=è¿ç®—ç¬¦, ç”¨äºä»»æ„ç±»å‹ç›¸åŠ 
     template <typename T>
     BigInteger& operator += (T x)
     {
@@ -226,7 +226,7 @@ public:
         *this = *this + t;
         return *this;
     }
-    //ÖØÔØ-ÔËËã·û, ÓÃÓÚÁ½¸ö´óÊıÏà¼õ
+    //é‡è½½-è¿ç®—ç¬¦, ç”¨äºä¸¤ä¸ªå¤§æ•°ç›¸å‡
     BigInteger operator - (BigInteger x)
     {
         BigInteger y = *this, ans;
@@ -250,33 +250,33 @@ public:
         ans.SetInteger();
         return ans;
     }
-    //ÖØÔØ-ÔËËã·û, ÓÃÓÚ´óÊıÓëÈÎÒâÀàĞÍÏà¼õ
+    //é‡è½½-è¿ç®—ç¬¦, ç”¨äºå¤§æ•°ä¸ä»»æ„ç±»å‹ç›¸å‡
     template <typename T>
     BigInteger operator - (T x)
     {
         BigInteger t((long long)x);
         return *this - t;
     }
-    //ÖØÔØºóÖÃ--ÔËËã·û
+    //é‡è½½åç½®--è¿ç®—ç¬¦
     const BigInteger operator -- (int)
     {
         BigInteger t = *this;
         *this = *this - 1;
         return t;
     }
-    //ÖØÔØÇ°ÖÃ--ÔËËã·û
+    //é‡è½½å‰ç½®--è¿ç®—ç¬¦
     BigInteger& operator -- ()
     {
         *this = *this - 1;
         return *this;
     }
-    //ÖØÔØ-=ÔËËã·û, ÓÃÓÚÁ½¸ö´óÊıÏà¼õ
+    //é‡è½½-=è¿ç®—ç¬¦, ç”¨äºä¸¤ä¸ªå¤§æ•°ç›¸å‡
     BigInteger& operator -= (BigInteger x)
     {
         *this = *this - x;
         return *this;
     }
-    //ÖØÔØ-=ÔËËã·û, ÓÃÓÚ´óÊıºÍÈÎÒâÀàĞÍÏà¼õ
+    //é‡è½½-=è¿ç®—ç¬¦, ç”¨äºå¤§æ•°å’Œä»»æ„ç±»å‹ç›¸å‡
     template <typename T>
     BigInteger& operator -= (T x)
     {
@@ -284,7 +284,7 @@ public:
         *this = *this - t;
         return *this;
     }
-    //ÖØÔØ*ÔËËã·û, ÓÃÓÚÁ½¸ö´óÊıÏà³Ë
+    //é‡è½½*è¿ç®—ç¬¦, ç”¨äºä¸¤ä¸ªå¤§æ•°ç›¸ä¹˜
     BigInteger operator * (BigInteger x)
     {
         BigInteger y = *this, ans;
@@ -306,20 +306,20 @@ public:
         ans.SetInteger();
         return ans;
     }
-    //ÖØÔØ*ÔËËã·û, ÓÃÓÚ´óÊıÓëÈÎÒâÁ½¸öÊıÏà³Ë
+    //é‡è½½*è¿ç®—ç¬¦, ç”¨äºå¤§æ•°ä¸ä»»æ„ä¸¤ä¸ªæ•°ç›¸ä¹˜
     template <typename T>
     BigInteger operator * (T x)
     {
         BigInteger t((long long)x);
         return *this * t;
     }
-    //ÖØÔØ*=ÔËËã·û, ÓÃÓÚÁ½¸ö´óÊıÏà³Ë
+    //é‡è½½*=è¿ç®—ç¬¦, ç”¨äºä¸¤ä¸ªå¤§æ•°ç›¸ä¹˜
     BigInteger& operator *= (BigInteger x)
     {
         *this = *this * x;
         return *this;
     }
-    //ÖØÔØ*=ÔËËã·û, ÓÃÓÚ´óÊıÓëÈÎÒâÀàĞÍÏà³Ë
+    //é‡è½½*=è¿ç®—ç¬¦, ç”¨äºå¤§æ•°ä¸ä»»æ„ç±»å‹ç›¸ä¹˜
     template <typename T>
     BigInteger& operator *= (T x)
     {
@@ -327,7 +327,7 @@ public:
         *this = *this * t;
         return *this;
     }
-    //ÖØÔØ/ÔËËã·û, ÓÃÓÚÁ½¸ö´óÊıÏà³ı
+    //é‡è½½/è¿ç®—ç¬¦, ç”¨äºä¸¤ä¸ªå¤§æ•°ç›¸é™¤
     BigInteger operator / (BigInteger x)
     {
         BigInteger y = *this, ans, cur;
@@ -354,7 +354,7 @@ public:
         ans.SetInteger();
         return ans;
     }
-    //ÖØÔØ/ÔËËã·û, ÓÃÓÚ´óÊıÓëÈÎºÎÀàĞÍ½øĞĞÏà³ı
+    //é‡è½½/è¿ç®—ç¬¦, ç”¨äºå¤§æ•°ä¸ä»»ä½•ç±»å‹è¿›è¡Œç›¸é™¤
     template <typename T>
     BigInteger operator / (T x)
     {
@@ -371,13 +371,13 @@ public:
         ans.SetInteger();
         return ans;
     }
-    //ÖØÔØ/=ÔËËã·û, ÓÃÓÚ´óÊıÓë´óÊıÏà³ı
+    //é‡è½½/=è¿ç®—ç¬¦, ç”¨äºå¤§æ•°ä¸å¤§æ•°ç›¸é™¤
     BigInteger& operator /= (BigInteger x)
     {
         *this = *this / x;
         return *this;
     }
-    //ÖØÔØ/=ÔËËã·û, ÓÃÓÚ´óÊı³ıÒÔÒ»¸öÈÎÒâÀàĞÍµÄÊı
+    //é‡è½½/=è¿ç®—ç¬¦, ç”¨äºå¤§æ•°é™¤ä»¥ä¸€ä¸ªä»»æ„ç±»å‹çš„æ•°
     template <typename T>
     BigInteger& operator /= (T x)
     {
@@ -385,7 +385,7 @@ public:
         *this = *this / t;
         return *this;
     }
-    //ÖØÔØ%ÔËËã·û, ÓÃÓÚ¶ÔÁ½¸ö´óÊıÖ®¼äµÄÇóÓà²Ù×÷
+    //é‡è½½%è¿ç®—ç¬¦, ç”¨äºå¯¹ä¸¤ä¸ªå¤§æ•°ä¹‹é—´çš„æ±‚ä½™æ“ä½œ
     BigInteger operator % (BigInteger x)
     {
         BigInteger y = *this, ans;
@@ -411,7 +411,7 @@ public:
         ans.SetInteger();
         return ans;
     }
-    //ÖØÔØ%ÔËËã·û, ÓÃÓÚÒ»¸ö´óÊıºÍÒ»¸öÈÎÒâÀàĞÍµÄÊıÇóÓà²Ù×÷
+    //é‡è½½%è¿ç®—ç¬¦, ç”¨äºä¸€ä¸ªå¤§æ•°å’Œä¸€ä¸ªä»»æ„ç±»å‹çš„æ•°æ±‚ä½™æ“ä½œ
     template <typename T>
     T operator % (T x)
     {
@@ -425,13 +425,13 @@ public:
         }
         return ans;
     }
-    //ÖØÔØ%=ÔËËã·û, ÓÃÓÚÁ½¸ö´óÊıÖ®¼äµÄÇóÓà²Ù×÷
+    //é‡è½½%=è¿ç®—ç¬¦, ç”¨äºä¸¤ä¸ªå¤§æ•°ä¹‹é—´çš„æ±‚ä½™æ“ä½œ
     BigInteger& operator %= (BigInteger x)
     {
         *this = *this % x;
         return *this;
     }
-    //ÖØÔØ%=ÔËËã·û, ÓÃÓÚ´óÊıºÍÒ»¸öÈÎÒâÀàĞÍÊıµÄÇóÓà²Ù×÷
+    //é‡è½½%=è¿ç®—ç¬¦, ç”¨äºå¤§æ•°å’Œä¸€ä¸ªä»»æ„ç±»å‹æ•°çš„æ±‚ä½™æ“ä½œ
     template <typename T>
     BigInteger& operator %= (T x)
     {
@@ -439,18 +439,18 @@ public:
         *this = *this % t;
         return *this;
     }
-    //ÖØÔØ^ÔËËã·û, ´óÊıÖ®¼äµÄ³Ë·½, ÊıÖµ²»ÄÜÌ«´ó, ·ñÔò»á³¬³övectorµÄ×î´óÈİÁ¿
+    //é‡è½½^è¿ç®—ç¬¦, å¤§æ•°ä¹‹é—´çš„ä¹˜æ–¹, æ•°å€¼ä¸èƒ½å¤ªå¤§, å¦åˆ™ä¼šè¶…å‡ºvectorçš„æœ€å¤§å®¹é‡
     BigInteger operator ^ (BigInteger x)
     {
         return pow(*this, x);
     }
-    //ÖØÔØ^ÔËËã·û, ´óÊıÓëÒ»¸ö½ÏĞ¡ÊıµÄ³Ë·½
+    //é‡è½½^è¿ç®—ç¬¦, å¤§æ•°ä¸ä¸€ä¸ªè¾ƒå°æ•°çš„ä¹˜æ–¹
     template <typename T>
     BigInteger operator ^ (T x)
     {
         return pow(*this, (long long)x);
     }
-    //´óÊıÖ®¼äµÄ×î´ó¹«Ô¼Êı
+    //å¤§æ•°ä¹‹é—´çš„æœ€å¤§å…¬çº¦æ•°
     BigInteger gcd(BigInteger b)
     {
         BigInteger a = *this;
@@ -465,13 +465,13 @@ public:
         a.SetInteger();
         return a;
     }
-    //´óÊıÖ®¼äµÄ×îĞ¡¹«±¶Êı
+    //å¤§æ•°ä¹‹é—´çš„æœ€å°å…¬å€æ•°
     BigInteger lcm(BigInteger b)
     {
         BigInteger a = *this;
         return a * b / a.gcd(b);
     }
-    //´óÊı¿ª·½
+    //å¤§æ•°å¼€æ–¹
     BigInteger sqrt()
     {
         BigInteger a = *this, x0 = a, x1 = (a + 1) / 2;
@@ -482,7 +482,7 @@ public:
         }
         return x0;
     }
-    //´óÊılog
+    //å¤§æ•°log
     int log(int n)   // log_n(a)
     {
         BigInteger a = *this;

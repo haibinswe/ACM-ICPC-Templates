@@ -1,5 +1,5 @@
 const int MAXN = 1005;
-int nc, ns; //nc´ú±í¿Î³ÌÊý ns´ú±íÑ§ÉúÊý
+int nc, ns; //ncä»£è¡¨è¯¾ç¨‹æ•° nsä»£è¡¨å­¦ç”Ÿæ•°
 int lefts[MAXN], rights[MAXN];
 int g[MAXN][MAXN];
 int pre_left[MAXN], mark_right[MAXN];

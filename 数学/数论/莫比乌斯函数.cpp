@@ -26,7 +26,7 @@ void GetMobius()
     for (int i = 1; i < N; i++)
         sum[i] = sum[i - 1] + mu[i];
 }
-//Çó1 <= x <= n,1 <= y <= mÖÐ gcd(x,y) == 1µÄ¸öÊý
+//æ±‚1 <= x <= n,1 <= y <= mä¸­ gcd(x,y) == 1çš„ä¸ªæ•°
 long long solve(int n, int m)
 {
     long long res = 0;

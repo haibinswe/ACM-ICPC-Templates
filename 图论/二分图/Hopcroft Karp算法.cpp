@@ -1,9 +1,9 @@
 /*==================================================*\
-| ����ͼƥ�䣨Hopcroft-Karp���㷨��
-| INIT: g[][]�ڽӾ���;
-| CALL: res = Hopcroft_Karp(); NX, NYҪ��ʼ��
-| ���Ըĳ��±�Ϊ1
-| ʱ�临�Ӷ�ΪO��V^0.5E��
+| 二分图匹配（Hopcroft-Karp的算法）
+| INIT: g[][]邻接矩阵;
+| CALL: res = Hopcroft_Karp(); NX, NY要初始化
+| 可以改成下标为1
+| 时间复杂度为O（V^0.5E）
 \*==================================================*/
 const int MAXN = 3001;
 int g[MAXN][MAXN], mx[MAXN], my[MAXN], NX, NY;

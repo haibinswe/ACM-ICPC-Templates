@@ -1,13 +1,13 @@
 const int MAX = 1024;
-int n;                  // X µÄ´óĞ¡
-int weight[MAX][MAX];   // X µ½ Y µÄÓ³Éä£¨È¨ÖØ£©
-int lx[MAX], ly[MAX];   // ±êºÅ
-bool sx[MAX], sy[MAX];  // ÊÇ·ñ±»ËÑË÷¹ı
-int match[MAX];         // Y(i) Óë X(match[i]) Æ¥Åä
+int n;                  // X çš„å¤§å°
+int weight[MAX][MAX];   // X åˆ° Y çš„æ˜ å°„ï¼ˆæƒé‡ï¼‰
+int lx[MAX], ly[MAX];   // æ ‡å·
+bool sx[MAX], sy[MAX];  // æ˜¯å¦è¢«æœç´¢è¿‡
+int match[MAX];         // Y(i) ä¸ X(match[i]) åŒ¹é…
 
 void init(int sz)
 {
-    // ¸ù¾İÊµ¼ÊÇé¿ö£¬Ìí¼Ó´úÂëÒÔ³õÊ¼»¯
+    // æ ¹æ®å®é™…æƒ…å†µï¼Œæ·»åŠ ä»£ç ä»¥åˆå§‹åŒ–
     n = sz;
     for (int i = 0; i < n; i++)
     {
@@ -33,7 +33,7 @@ bool path(int u)
     }
     return false;
 }
-// ²ÎÊı maxsum Îª true £¬·µ»Ø×î´óÈ¨Æ¥Åä£¬·ñÔò×îĞ¡È¨Æ¥Åä
+// å‚æ•° maxsum ä¸º true ï¼Œè¿”å›æœ€å¤§æƒåŒ¹é…ï¼Œå¦åˆ™æœ€å°æƒåŒ¹é…
 int Kuhn_Munkras(bool maxsum)
 {
     if (!maxsum)
@@ -44,7 +44,7 @@ int Kuhn_Munkras(bool maxsum)
                 weight[i][j] = -weight[i][j];
         }
     }
-    // ³õÊ¼»¯±êºÅ
+    // åˆå§‹åŒ–æ ‡å·
     for (int i = 0; i < n; i++)
     {
         lx[i] = -0x1FFFFFFF;
@@ -60,7 +60,7 @@ int Kuhn_Munkras(bool maxsum)
             memset(sx, 0, sizeof(sx));
             memset(sy, 0, sizeof(sy));
             if (path(u)) break;
-            // ĞŞ¸Ä±êºÅ
+            // ä¿®æ”¹æ ‡å·
             int dx = 0x7FFFFFFF;
             for (int i = 0; i < n; i++)
             {

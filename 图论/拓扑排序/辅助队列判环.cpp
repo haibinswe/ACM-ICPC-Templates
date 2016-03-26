@@ -1,11 +1,11 @@
-// ³õÊ¼»¯£ºG±íÊ¾ÁÚ½Ó¾ØÕó£¬n±íÊ¾½áµã¸öÊý£¬ÏÂ±ê´Ó0¿ªÊ¼
-// ´Óiµ½jÈç¹ûÁ¬Í¨£¬ÔòG[i][j]=false£¬·ñÔòG[i][j]=true
-// µ÷ÓÃ£ºtoposort()£¬Èç¹ûÓÐ»·Ôò·µ»Øfalse¡£ÅÅÐò½á¹û±£´æÔÚÊý×éaÖÐ¡£
+// åˆå§‹åŒ–ï¼šGè¡¨ç¤ºé‚»æŽ¥çŸ©é˜µï¼Œnè¡¨ç¤ºç»“ç‚¹ä¸ªæ•°ï¼Œä¸‹æ ‡ä»Ž0å¼€å§‹
+// ä»Žiåˆ°jå¦‚æžœè¿žé€šï¼Œåˆ™G[i][j]=falseï¼Œå¦åˆ™G[i][j]=true
+// è°ƒç”¨ï¼štoposort()ï¼Œå¦‚æžœæœ‰çŽ¯åˆ™è¿”å›žfalseã€‚æŽ’åºç»“æžœä¿å­˜åœ¨æ•°ç»„aä¸­ã€‚
 const int MAXN = 1000;
-bool G[MAXN][MAXN]; // ÁÚ½Ó¾ØÕó
-int n; // ½áµã¸öÊý
-int cnt[MAXN]; // cnt[i]±íÊ¾½áµãiµÄÈë¶È
-int a[MAXN], a_n; // ½á¹û±£´æÔÚÊý×éaÖÐ
+bool G[MAXN][MAXN]; // é‚»æŽ¥çŸ©é˜µ
+int n; // ç»“ç‚¹ä¸ªæ•°
+int cnt[MAXN]; // cnt[i]è¡¨ç¤ºç»“ç‚¹içš„å…¥åº¦
+int a[MAXN], a_n; // ç»“æžœä¿å­˜åœ¨æ•°ç»„aä¸­
 queue<int> q;
 bool toposort()
 {

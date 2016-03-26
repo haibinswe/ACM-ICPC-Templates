@@ -1,4 +1,4 @@
-//�ǵݹ�汾
+//非递归版本
 int gcd(int m, int n)
 {
     if (n == 0) return m;
@@ -10,7 +10,7 @@ int gcd(int m, int n)
     }
     return m;
 }
-//�ݹ�汾
+//递归版本
 int gcd(int m, int n)
 {
     return n ? gcd(n, m % n) : m;

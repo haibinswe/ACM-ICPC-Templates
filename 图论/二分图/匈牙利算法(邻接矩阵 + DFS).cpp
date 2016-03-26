@@ -1,13 +1,13 @@
 /*****************************************************
-����ͼƥ�䣨�������㷨��DFSʵ�֣�
-INIT��g[][]���߶��㻮�ֵ����
-CALL:res=hungary();������ƥ����
-�ŵ㣺���ڳ���ͼ��DFS������·�죬ʵ�ּ����������
-ʱ�临�Ӷ�:O(VE);
+二分图匹配（匈牙利算法的DFS实现）
+INIT：g[][]两边定点划分的情况
+CALL:res=hungary();输出最大匹配数
+优点：适于稠密图，DFS找增广路快，实现简洁易于理解
+时间复杂度:O(VE);
 *****************************************************/
 const int MAXN = 1000;
-int uN, vN; //u,v��Ŀ
-int g[MAXN][MAXN];//�����0~n-1��
+int uN, vN; //u,v数目
+int g[MAXN][MAXN];//编号是0~n-1的
 int linker[MAXN];
 bool used[MAXN];
 bool dfs(int u)

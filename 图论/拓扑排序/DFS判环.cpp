@@ -1,12 +1,12 @@
-// ³õÊ¼»¯£ºG±íÊ¾ÁÚ½Ó¾ØÕó£¬n±íÊ¾½áµã¸öÊý£¬ÏÂ±ê´Ó0¿ªÊ¼
-// ´Óiµ½jÈç¹ûÁ¬Í¨£¬ ÔòG[i][j]=false£¬ ·ñÔòG[i][j]=true
-// µ÷ÓÃ£ºtoposort()£¬Èç¹ûÓÐ»·Ôò·µ»Øfalse¡£ÅÅÐò½á¹û±£´æÔÚÊý×éaÖÐ¡£
+// åˆå§‹åŒ–ï¼šGè¡¨ç¤ºé‚»æŽ¥çŸ©é˜µï¼Œnè¡¨ç¤ºç»“ç‚¹ä¸ªæ•°ï¼Œä¸‹æ ‡ä»Ž0å¼€å§‹
+// ä»Žiåˆ°jå¦‚æžœè¿žé€šï¼Œ åˆ™G[i][j]=falseï¼Œ å¦åˆ™G[i][j]=true
+// è°ƒç”¨ï¼štoposort()ï¼Œå¦‚æžœæœ‰çŽ¯åˆ™è¿”å›žfalseã€‚æŽ’åºç»“æžœä¿å­˜åœ¨æ•°ç»„aä¸­ã€‚
 const int MAXN = 1000;
-bool G[MAXN][MAXN]; // ÁÚ½Ó¾ØÕó
-int n; // ½áµã¸öÊý
+bool G[MAXN][MAXN]; // é‚»æŽ¥çŸ©é˜µ
+int n; // ç»“ç‚¹ä¸ªæ•°
 int a[MAXN], a_n;
-// ½áµã·ÃÎÊÇé¿ö£º0¡¢1¡¢2·Ö±ð´ú±íÎ´·ÃÎÊ¡¢ÕýÔÚ·ÃÎÊ¡¢ÒÑ·ÃÎÊ¡£
-// Èç¹ûÕýÔÚ·ÃÎÊµÄµãÓÖ±»·ÃÎÊÒ»´Î£¬ËµÃ÷ÓÐ»·¡£
+// ç»“ç‚¹è®¿é—®æƒ…å†µï¼š0ã€1ã€2åˆ†åˆ«ä»£è¡¨æœªè®¿é—®ã€æ­£åœ¨è®¿é—®ã€å·²è®¿é—®ã€‚
+// å¦‚æžœæ­£åœ¨è®¿é—®çš„ç‚¹åˆè¢«è®¿é—®ä¸€æ¬¡ï¼Œè¯´æ˜Žæœ‰çŽ¯ã€‚
 int vis[MAXN];
 bool DFS(int v)
 {

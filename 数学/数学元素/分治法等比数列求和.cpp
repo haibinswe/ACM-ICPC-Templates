@@ -1,4 +1,4 @@
-//ÆÕÍ¨ÕûÊý
+//æ™®é€šæ•´æ•°
 long long qsum(long long q, long long n)
 {
     n++;
@@ -12,7 +12,7 @@ long long qsum(long long q, long long n)
     }
     return ans;
 }
-//¾ØÕó
+//çŸ©é˜µ
 Matrix qsum(Matrix q, long long n)
 {
     n++;

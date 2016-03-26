@@ -1,11 +1,11 @@
-// ³õÊ¼»¯£ºG±íÊ¾ÁÚ½Ó¾ØÕó£¬n±íÊ¾½áµã¸öÊý£¬ÏÂ±ê´Ó0¿ªÊ¼
-// ´Óiµ½jÈç¹ûÁ¬Í¨£¬ÔòG[i][j]=false£¬ ·ñÔòG[i][j]=true
-// µ÷ÓÃ£ºfind_circuit()£¬Èç¹ûÓÐÅ·À­Í¨Â·ÔòÊä³ö²¢·µ»Øtrue
-// ×¢Òâ£º´Ëº¯Êý»áÆÆ»µGµÄÖµ£¬ÇëÊÂÏÈ×öºÃ±¸·Ý¡£
+// åˆå§‹åŒ–ï¼šGè¡¨ç¤ºé‚»æŽ¥çŸ©é˜µï¼Œnè¡¨ç¤ºç»“ç‚¹ä¸ªæ•°ï¼Œä¸‹æ ‡ä»Ž0å¼€å§‹
+// ä»Žiåˆ°jå¦‚æžœè¿žé€šï¼Œåˆ™G[i][j]=falseï¼Œ å¦åˆ™G[i][j]=true
+// è°ƒç”¨ï¼šfind_circuit()ï¼Œå¦‚æžœæœ‰æ¬§æ‹‰é€šè·¯åˆ™è¾“å‡ºå¹¶è¿”å›žtrue
+// æ³¨æ„ï¼šæ­¤å‡½æ•°ä¼šç ´åGçš„å€¼ï¼Œè¯·äº‹å…ˆåšå¥½å¤‡ä»½ã€‚
 const int MAXN = 1000;
-bool G[MAXN][MAXN]; // ÁÚ½Ó¾ØÕó
-int n; // ½áµã¸öÊý
-// ÎÞÏòÍ¼µÄÁÚ½Ó¾ØÕó¡£Èç¹ûÁ½µãÁ¬Í¨,ÔòÎª1,·ñÔòÎª0
+bool G[MAXN][MAXN]; // é‚»æŽ¥çŸ©é˜µ
+int n; // ç»“ç‚¹ä¸ªæ•°
+// æ— å‘å›¾çš„é‚»æŽ¥çŸ©é˜µã€‚å¦‚æžœä¸¤ç‚¹è¿žé€š,åˆ™ä¸º1,å¦åˆ™ä¸º0
 int cnt[MAXN];
 int circuit[MAXN], pos;
 void search(int i)
@@ -27,7 +27,7 @@ bool find_circuit()
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < n; j++)
-            if (G[i][j]) ++cnt[i]; // Í³¼Æ½áµãÈë¶È
+            if (G[i][j]) ++cnt[i]; // ç»Ÿè®¡ç»“ç‚¹å…¥åº¦
     }
     for (int i = 0; i < n; i++)
     {

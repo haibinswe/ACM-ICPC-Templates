@@ -4,15 +4,15 @@ struct Point
     double x, y, z;
     Point() { }
     Point(double xx, double yy, double zz) : x(xx), y(yy), z(zz) { }
-    Point operator - (const Point &p1) //Á½ÏòÁ¿Ö®²î
+    Point operator - (const Point &p1) //ä¸¤å‘é‡ä¹‹å·®
     {
         return Point(x - p1.x, y - p1.y, z - p1.z);
     }
-    Point operator * (const Point &p) //²æ³Ë
+    Point operator * (const Point &p) //å‰ä¹˜
     {
         return Point(y * p.z - z * p.y, z * p.x - x * p.z, x * p.y - y * p.x);
     }
-    double operator ^ (const Point &p) //µã³Ë
+    double operator ^ (const Point &p) //ç‚¹ä¹˜
     {
         return (x * p.x + y * p.y + z * p.z);
     }
@@ -21,14 +21,14 @@ struct ConvexHull3D
 {
     struct Surface
     {
-        int a, b, c; //±íÊ¾Í¹°üÒ»¸öÃæÉÏÈı¸öµãµÄ±àºÅ
-        bool ok;     //±íÊ¾¸ÃÃæÊÇ·ñÊôÓÚ×îÖÕÍ¹°üÖĞµÄÃæ
+        int a, b, c; //è¡¨ç¤ºå‡¸åŒ…ä¸€ä¸ªé¢ä¸Šä¸‰ä¸ªç‚¹çš„ç¼–å·
+        bool ok;     //è¡¨ç¤ºè¯¥é¢æ˜¯å¦å±äºæœ€ç»ˆå‡¸åŒ…ä¸­çš„é¢
     };
-    int n;           //³õÊ¼¶¥µãÊı
-    Point P[N];      //³õÊ¼¶¥µã
-    int num;         //Í¹°ü±íÃæµÄÈı½ÇĞÎÊı
+    int n;           //åˆå§‹é¡¶ç‚¹æ•°
+    Point P[N];      //åˆå§‹é¡¶ç‚¹
+    int num;         //å‡¸åŒ…è¡¨é¢çš„ä¸‰è§’å½¢æ•°
     Surface F[8 * N];
-    int g[N][N];     //Í¹°ü±íÃæµÄÈı½ÇĞÎ
+    int g[N][N];     //å‡¸åŒ…è¡¨é¢çš„ä¸‰è§’å½¢
     void AddPoint(int num)
     {
         n = num;
@@ -37,24 +37,24 @@ struct ConvexHull3D
             scanf("%lf%lf%lf", &P[i].x, &P[i].y, &P[i].z);
         }
     }
-    double vlen(Point a)      //ÏòÁ¿³¤¶È
+    double vlen(Point a)      //å‘é‡é•¿åº¦
     {
         return sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
     }
-    Point cross(const Point &a, const Point &b, const Point &c)  //²æ³Ë
+    Point cross(const Point &a, const Point &b, const Point &c)  //å‰ä¹˜
     {
         return Point((b.y - a.y) * (c.z - a.z) - (b.z - a.z) * (c.y - a.y), -((b.x - a.x) * (c.z - a.z)
             - (b.z - a.z) * (c.x - a.x)), (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x));
     }
-    double area(Point a, Point b, Point c)    //Èı½ÇĞÎÃæ»ı*2
+    double area(Point a, Point b, Point c)    //ä¸‰è§’å½¢é¢ç§¯*2
     {
         return vlen((b - a) * (c - a));
     }
-    double volume(Point a, Point b, Point c, Point d) //ËÄÃæÌåÓĞÏòÌå»ı*6
+    double volume(Point a, Point b, Point c, Point d) //å››é¢ä½“æœ‰å‘ä½“ç§¯*6
     {
         return (b - a) * (c - a) ^ (d - a);
     }
-    double dblcmp(Point &p, Surface &f)  //Õı:µãÔÚÃæÍ¬Ïò
+    double dblcmp(Point &p, Surface &f)  //æ­£:ç‚¹åœ¨é¢åŒå‘
     {
         Point m = P[f.b] - P[f.a];
         Point n = P[f.c] - P[f.a];
@@ -95,14 +95,14 @@ struct ConvexHull3D
             && fabs(volume(a, b, c, P[F[t].b])) < eps
             && fabs(volume(a, b, c, P[F[t].c])) < eps;
     }
-    void Solve()  //¹¹½¨ÈıÎ¬Í¹°ü
+    void Solve()  //æ„å»ºä¸‰ç»´å‡¸åŒ…
     {
         int tmp;
         Surface add;
         bool flag = true;
         num = 0;
         if (n < 4) return;
-        for (int i = 1; i < n; i++) //´Ë¶ÎÊÇÎªÁË±£Ö¤Ç°ËÄ¸öµã²»¹²Ãæ,ÈôÒÔ±£Ö¤,Ôò¿ÉÈ¥µô
+        for (int i = 1; i < n; i++) //æ­¤æ®µæ˜¯ä¸ºäº†ä¿è¯å‰å››ä¸ªç‚¹ä¸å…±é¢,è‹¥ä»¥ä¿è¯,åˆ™å¯å»æ‰
         {
             if (vlen(P[0] - P[i]) > eps)
             {
@@ -113,7 +113,7 @@ struct ConvexHull3D
         }
         if (flag) return;
         flag = true;
-        for (int i = 2; i < n; i++) //Ê¹Ç°Èıµã²»¹²Ïß
+        for (int i = 2; i < n; i++) //ä½¿å‰ä¸‰ç‚¹ä¸å…±çº¿
         {
             if (vlen((P[0] - P[1]) * (P[1] - P[i])) > eps)
             {
@@ -124,7 +124,7 @@ struct ConvexHull3D
         }
         if (flag) return;
         flag = true;
-        for (int i = 3; i < n; i++) //Ê¹Ç°ËÄµã²»¹²Ãæ
+        for (int i = 3; i < n; i++) //ä½¿å‰å››ç‚¹ä¸å…±é¢
         {
             if (fabs((P[0] - P[1]) * (P[1] - P[2]) ^ (P[0] - P[i])) > eps)
             {
@@ -161,7 +161,7 @@ struct ConvexHull3D
             if (F[i].ok) F[num++] = F[i];
         }
     }
-    double GetArea()     //Í¹°ü±íÃæ»ı
+    double GetArea()     //å‡¸åŒ…è¡¨é¢ç§¯
     {
         double res = 0.0;
         if (n == 3)
@@ -176,7 +176,7 @@ struct ConvexHull3D
         }
         return res / 2.0;
     }
-    double GetVolume()  //Í¹°üÌå»ı
+    double GetVolume()  //å‡¸åŒ…ä½“ç§¯
     {
         double res = 0.0;
         Point tmp(0, 0, 0);
@@ -186,11 +186,11 @@ struct ConvexHull3D
         }
         return fabs(res / 6.0);
     }
-    int GetTriangle()   //±íÃæÈı½ÇĞÎ¸öÊı
+    int GetTriangle()   //è¡¨é¢ä¸‰è§’å½¢ä¸ªæ•°
     {
         return num;
     }
-    int GetPolygon()   //±íÃæ¶à±ßĞÎ¸öÊı
+    int GetPolygon()   //è¡¨é¢å¤šè¾¹å½¢ä¸ªæ•°
     {
         int res = 0, flag;
         for (int i = 0; i < num; i++)
@@ -208,7 +208,7 @@ struct ConvexHull3D
         }
         return res;
     }
-    Point GetCenter() //ÇóÍ¹°üÖÊĞÄ
+    Point GetCenter() //æ±‚å‡¸åŒ…è´¨å¿ƒ
     {
         Point ans(0, 0, 0), temp = P[F[0].a];
         double v = 0.0, t2;
@@ -217,7 +217,7 @@ struct ConvexHull3D
             if (F[i].ok == true)
             {
                 Point p1 = P[F[i].a], p2 = P[F[i].b], p3 = P[F[i].c];
-                t2 = volume(temp, p1, p2, p3) / 6.0; //Ìå»ı´óÓÚ0£¬Ò²¾ÍÊÇËµ£¬µã temp ²»ÔÚÕâ¸öÃæÉÏ
+                t2 = volume(temp, p1, p2, p3) / 6.0; //ä½“ç§¯å¤§äº0ï¼Œä¹Ÿå°±æ˜¯è¯´ï¼Œç‚¹ temp ä¸åœ¨è¿™ä¸ªé¢ä¸Š
                 if (t2 > 0)
                 {
                     ans.x += (p1.x + p2.x + p3.x + temp.x) * t2;
@@ -232,7 +232,7 @@ struct ConvexHull3D
         ans.z /= (4 * v);
         return ans;
     }
-    double GetDistance(Point fuck) //µãµ½Í¹°üÉÏµÄ×î½ü¾àÀë£¨Ã¶¾ÙÃ¿¸öÃæµ½Õâ¸öµãµÄ¾àÀë£©
+    double GetDistance(Point fuck) //ç‚¹åˆ°å‡¸åŒ…ä¸Šçš„æœ€è¿‘è·ç¦»ï¼ˆæšä¸¾æ¯ä¸ªé¢åˆ°è¿™ä¸ªç‚¹çš„è·ç¦»ï¼‰
     {
         double min = inf;
         for (int i = 0; i < num; i++)

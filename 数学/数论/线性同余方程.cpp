@@ -1,4 +1,4 @@
-// Èç¹ûÓĞ½âÔòÊä³ö½â²¢·µ»Øtrue£¬ ·ñÔò·µ»Øfalse
+// å¦‚æœæœ‰è§£åˆ™è¾“å‡ºè§£å¹¶è¿”å›trueï¼Œ å¦åˆ™è¿”å›false
 bool mod_equation(int a, int b, int n)
 {
     int x, y;

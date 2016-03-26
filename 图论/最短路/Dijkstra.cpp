@@ -29,7 +29,7 @@ void Dijkstra(int n)
 {
     for (int i = 1; i <= n; i++)
     {
-        //贪心, 搜索出权值最小的点的下标
+        //璐績, 鎼滅储鍑烘潈鍊兼渶灏忕殑鐐圭殑涓嬫爣
         int u = 0;
         for (int j = 1; j <= n; j++)
         {
@@ -49,7 +49,7 @@ void Dijkstra(int n)
 
 void Print(int s, int v)
 {
-    //按顺序输出点
+    //鎸夐『搴忚緭鍑虹偣
     stack<int> path;
     if (pre[v])
     {
@@ -60,7 +60,7 @@ void Print(int s, int v)
         }
         path.push(v);
     }
-    else path.push(-1); //如果没有路径
+    else path.push(-1); //濡傛灉娌℃湁璺緞
     while (!path.empty())
     {
         printf("%d ", path.top());
